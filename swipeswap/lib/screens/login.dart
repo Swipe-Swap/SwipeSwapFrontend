@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swipeswap/screens/swaps.dart';
 import 'package:swipeswap/screens/welcome.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swipeswap/services/auth.dart';
+import 'package:swipeswap/utils/constants.dart';
+import 'package:swipeswap/utils/routing.dart';
 
 /// Login page
 class Login extends StatefulWidget {
@@ -35,7 +38,14 @@ class _LoginState extends State<Login> {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            AuthService().signInWithGoogle();
+            final login = await AuthService().signInWithGoogle();
+            if (login != null) {
+              // check if no login errors
+              navigateToRoute(context, Routes.swaps.toString());
+            } else {
+              // login error
+              //TODO Snackbar
+            }
           },
           child: const Text('Sign in with Google'),
         ),

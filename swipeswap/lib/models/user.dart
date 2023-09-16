@@ -1,15 +1,23 @@
-class User {
-  int userId;
-  String name;
+class SwapUser {
+  String userId;
+  String fullName;
   String email;
+  double rating;
+  DateTime timeCreated;
 
-  User({required this.userId, required this.name, required this.email});
+  SwapUser(
+      {required this.userId,
+      required this.fullName,
+      required this.email,
+      required this.rating,
+      required this.timeCreated});
 
-  factory User.fromJson(Map<String, dynamic> responseData) {
-    return User(
-      userId: responseData['id'],
-      name: responseData['name'],
-      email: responseData['email'],
-    );
+  factory SwapUser.fromJson(Map<String, dynamic> responseData) {
+    return SwapUser(
+        userId: responseData['id'],
+        fullName: responseData['fullName'],
+        email: responseData['email'],
+        timeCreated: responseData['timeCreated'],
+        rating: responseData['rating']);
   }
 }
