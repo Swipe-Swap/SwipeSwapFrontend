@@ -6,7 +6,8 @@ enum Routes {
   login,
   register,
   swaps,
-  user;
+  user,
+  order;
 
   @override
   String toString() {
@@ -21,8 +22,34 @@ enum Routes {
         return "/swaps";
       case user:
         return "/user";
+      case order:
+        return "/user";
       default:
         return "/swaps";
+    }
+  }
+}
+
+enum Assets {
+  earhart,
+  ford,
+  hillenbrand,
+  windsor,
+  wiley;
+
+  @override
+  String toString() {
+    switch (this) {
+      case earhart:
+        return "assets/images/earhart.png";
+      case ford:
+        return "assets/images/ford.png";
+      case hillenbrand:
+        return "assets/images/hillenbrand.png";
+      case windsor:
+        return "assets/images/wiley.png";
+      case wiley:
+        return "assets/images/windsor.png";
     }
   }
 }

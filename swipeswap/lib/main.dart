@@ -5,6 +5,7 @@ import 'package:swipeswap/firebase_options.dart';
 
 // Package imports
 import 'package:swipeswap/screens/login.dart';
+import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/screens/swaps.dart';
 import 'package:swipeswap/screens/user.dart';
 import 'package:swipeswap/screens/welcome.dart';
@@ -51,6 +52,7 @@ class SwipeSwap extends StatelessWidget {
         Routes.login.toString(): (context) => const Login(),
         Routes.swaps.toString(): (context) => const Swaps(),
         Routes.user.toString(): (context) => const User(),
+        Routes.order.toString(): (context) => const Order(),
       },
     );
   }
