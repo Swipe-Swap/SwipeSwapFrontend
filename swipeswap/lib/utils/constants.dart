@@ -27,6 +27,30 @@ enum Routes {
   }
 }
 
+enum Assets {
+  earhart,
+  ford,
+  hillenbrand,
+  windsor,
+  wiley;
+
+  @override
+  String toString() {
+    switch (this) {
+      case earhart:
+        return "assets/images/earhart.png";
+      case ford:
+        return "assets/images/ford.png";
+      case hillenbrand:
+        return "assets/images/hillenbrand.png";
+      case windsor:
+        return "assets/images/wiley.png";
+      case wiley:
+        return "assets/images/windsor.png";
+    }
+  }
+}
+
 // Color themes
 const Color kPrimaryColor1 = Color(0xFF222831);
 const Color kPrimaryColor2 = Color(0xFFF8F5F1);
