@@ -23,7 +23,7 @@ enum Routes {
       case user:
         return "/user";
       case order:
-        return "/user";
+        return "/order";
       default:
         return "/swaps";
     }
