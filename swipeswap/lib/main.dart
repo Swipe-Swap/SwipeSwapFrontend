@@ -1,9 +1,10 @@
 // Flutter imports
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:swipeswap/firebase_options.dart';
 
 // Package imports
 import 'package:swipeswap/screens/login.dart';
-import 'package:swipeswap/screens/register.dart';
 import 'package:swipeswap/screens/swaps.dart';
 import 'package:swipeswap/screens/user.dart';
 import 'package:swipeswap/screens/welcome.dart';
@@ -12,15 +13,22 @@ import 'package:swipeswap/utils/constants.dart';
 // Third-party dependency imports
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<>(create: create),
-      ChangeNotifierProvider<>(create: create),
-      ChangeNotifierProvider<>(create: create),
-    ],
-    child: const SwipeSwap(),
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    // MultiProvider(
+    // providers: [
+    // ChangeNotifierProvider<>(create: create),
+    // ChangeNotifierProvider<>(create: create),
+    // ChangeNotifierProvider<>(create: create),
+    // ],
+    // child: const SwipeSwap(),
+    // ),
+    const SwipeSwap(),
+  );
 }
 
 class SwipeSwap extends StatelessWidget {
@@ -37,11 +45,10 @@ class SwipeSwap extends StatelessWidget {
       ),
       home: const Welcome(),
       routes: {
-        Routes.welcome.toString(): (context) => Welcome(),
-        Routes.login.toString(): (context) => Login(),
-        Routes.register.toString(): (context) => Register(),
-        Routes.swaps.toString(): (context) => Swaps(),
-        Routes.user.toString(): (context) => User(),
+        Routes.welcome.toString(): (context) => const Welcome(),
+        Routes.login.toString(): (context) => const Login(),
+        Routes.swaps.toString(): (context) => const Swaps(),
+        Routes.user.toString(): (context) => const User(),
       },
     );
   }
