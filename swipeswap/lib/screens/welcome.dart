@@ -255,30 +255,6 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
           ),
         ),
         const Expanded(child: SizedBox()),
-        GestureDetector(
-          onTap: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Login(),
-                ));
-          },
-          child: Container(
-            height: 60,
-            width: MediaQuery.of(context).size.width * 0.8,
-            decoration: const BoxDecoration(
-                color: kAccentColor1,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15.0),
-                )),
-            child: Center(
-                child: Text('Already have an account?',
-                    style: TextStyle(
-                      color: kPrimaryColor2,
-                      fontSize: width * 0.045,
-                    ))),
-          ),
-        ),
         SizedBox(
           height: 60 + (height * 0.06),
         ),
