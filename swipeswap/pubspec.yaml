@@ -1,5 +1,5 @@
 name: swipeswap
-description: A new Flutter project.
+description: Swap your swipes!
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -34,7 +34,9 @@ dependencies:
   firebase_core: ^2.15.1
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   google_sign_in: ^6.1.5
+  map_location_picker: ^1.2.6
   provider: ^6.0.5
 
 dev_dependencies:
@@ -53,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - .env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

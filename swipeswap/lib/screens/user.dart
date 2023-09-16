@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 /// User profile page
+/// Users have:
+/// - currentLocation
+/// - dateCreated
+/// - fullName
+/// - phoneNumber
+/// - sellerRating
+/// - TODO: profilePic
 class User extends StatefulWidget {
   const User({super.key});
 

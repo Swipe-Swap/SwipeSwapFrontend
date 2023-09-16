@@ -24,8 +24,9 @@ class _SwapsState extends State<Swaps> {
           DiningCourtWidget(
               assetPath: Assets.windsor.toString(), assetText: "Windsor"),
           DiningCourtWidget(
-              assetPath: Assets.hillenbrand.toString(),
-              assetText: "Hillenbrand"),
+            assetPath: Assets.hillenbrand.toString(),
+            assetText: "Hillenbrand",
+          ),
           DiningCourtWidget(
               assetPath: Assets.ford.toString(), assetText: "Ford"),
         ],

@@ -4,6 +4,9 @@ import 'package:swipeswap/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
+/// "By the students, for the students"
+/// "Savor the flavor, fund the future"
+/// "Start swapping!"
 class Welcome extends StatefulWidget {
   final int currentPage;
   const Welcome({super.key, this.currentPage = 0});
