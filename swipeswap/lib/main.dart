@@ -13,6 +13,7 @@ import 'package:swipeswap/utils/constants.dart';
 
 // Third-party dependency imports
 import 'package:provider/provider.dart';
+import 'package:swipeswap/screens/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,12 +40,13 @@ class SwipeSwap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SwipeSwap',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Welcome(),
+      home: const Wrapper(),
       routes: {
         Routes.welcome.toString(): (context) => const Welcome(),
         Routes.login.toString(): (context) => const Login(),
