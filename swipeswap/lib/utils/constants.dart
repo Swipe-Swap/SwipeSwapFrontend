@@ -6,7 +6,8 @@ enum Routes {
   login,
   register,
   swaps,
-  user;
+  user,
+  order;
 
   @override
   String toString() {
@@ -20,6 +21,8 @@ enum Routes {
       case swaps:
         return "/swaps";
       case user:
+        return "/user";
+      case order:
         return "/user";
       default:
         return "/swaps";
