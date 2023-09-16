@@ -20,7 +20,7 @@ class _WrapperState extends State<Wrapper> {
     super.initState();
     user = FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
-        print('User is currently signed out!');
+        debugPrint('User is currently signed out!');
       } else {
         SwapUser(
           email: user.email.toString(),
@@ -29,7 +29,7 @@ class _WrapperState extends State<Wrapper> {
           fullName: user.displayName.toString(),
           timeCreated: DateTime(0),
         );
-        print('User is signed in!');
+        debugPrint('User is signed in!');
         print(user);
       }
     });

@@ -5,7 +5,6 @@ import 'package:swipeswap/screens/welcome.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/utils/routing.dart';
 
 /// Login page
 class Login extends StatefulWidget {
@@ -41,7 +40,9 @@ class _LoginState extends State<Login> {
             final login = await AuthService().signInWithGoogle();
             if (login != null) {
               // check if no login errors
-              navigateToRoute(context, Routes.swaps.toString());
+              if (context.mounted) {
+                Navigator.pushNamed(context, Routes.swaps.toString());
+              }
             } else {
               // login error
               //TODO Snackbar

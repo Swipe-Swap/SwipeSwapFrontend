@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/utils/routing.dart';
 
 /// A custom app bar that can be instantiated throughout screens
 /// Includes:
@@ -29,23 +28,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
         IconButton(
           tooltip: "Back Button",
           onPressed: () {
-            navigateBack(context);
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
         ),
-        (routes.isNotEmpty)
-            ? IconButton(
-                tooltip: "Forward Button",
-                onPressed: () {
-                  // Push the screen on top of the stack
-                  navigateToRoute(context, routes[routes.length - 1]);
-                },
-                icon: const Icon(Icons.arrow_forward),
-              )
-            : const IconButton(
-                onPressed: null,
-                icon: Icon(Icons.arrow_forward),
-              ),
         PopupMenuButton(
           icon: const Icon(Icons.menu),
           tooltip: "Menu Icon",

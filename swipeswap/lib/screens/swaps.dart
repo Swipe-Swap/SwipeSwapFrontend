@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:swipeswap/screens/pendingOrder.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/utils/routing.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
 
 /// Main application page
@@ -21,9 +21,11 @@ class _SwapsState extends State<Swaps> {
             onTap: () async {
               final logout = await AuthService().signOut();
               if (logout!) {
-                navigateToRoute(context, Routes.login.toString());
+                if (context.mounted) {
+                  Navigator.pushNamed(context, Routes.login.toString());
+                }
               } else {
-                //TODO:  Handle logout error snackbar
+                // TODO:  Handle logout error snackbar
               }
               ;
             },
@@ -32,21 +34,26 @@ class _SwapsState extends State<Swaps> {
               color: Colors.redAccent,
             )),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
+      body: Column(
         children: [
-          DiningCourtWidget(
-              assetPath: Assets.earhart.toString(), assetText: "Earhart"),
-          DiningCourtWidget(
-              assetPath: Assets.wiley.toString(), assetText: "Wiley"),
-          DiningCourtWidget(
-              assetPath: Assets.windsor.toString(), assetText: "Windsor"),
-          DiningCourtWidget(
-            assetPath: Assets.hillenbrand.toString(),
-            assetText: "Hillenbrand",
+          PendingOrder(),
+          GridView.count(
+            crossAxisCount: 2,
+            children: [
+              DiningCourtWidget(
+                  assetPath: Assets.earhart.toString(), assetText: "Earhart"),
+              DiningCourtWidget(
+                  assetPath: Assets.wiley.toString(), assetText: "Wiley"),
+              DiningCourtWidget(
+                  assetPath: Assets.windsor.toString(), assetText: "Windsor"),
+              DiningCourtWidget(
+                assetPath: Assets.hillenbrand.toString(),
+                assetText: "Hillenbrand",
+              ),
+              DiningCourtWidget(
+                  assetPath: Assets.ford.toString(), assetText: "Ford"),
+            ],
           ),
-          DiningCourtWidget(
-              assetPath: Assets.ford.toString(), assetText: "Ford"),
         ],
       ),
     );

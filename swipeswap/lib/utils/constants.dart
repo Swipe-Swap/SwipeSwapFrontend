@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:swipeswap/screens/pendingOrder.dart';
+
 /// Enum containing routes
 enum Routes {
   welcome,
@@ -7,7 +9,9 @@ enum Routes {
   register,
   swaps,
   user,
-  order;
+  order,
+  listing,
+  pendingOrders;
 
   @override
   String toString() {
@@ -24,6 +28,10 @@ enum Routes {
         return "/user";
       case order:
         return "/order";
+      case listing:
+        return "/listing";
+      case pendingOrders:
+        return "/pendingOrders";
       default:
         return "/swaps";
     }
