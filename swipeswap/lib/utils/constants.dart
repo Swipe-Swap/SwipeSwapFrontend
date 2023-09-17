@@ -102,7 +102,7 @@ enum DiningCourt {
   }
 }
 
-enum Assets {
+enum Asset {
   earhart,
   ford,
   hillenbrand,
@@ -121,6 +121,21 @@ enum Assets {
       case windsor:
         return "assets/images/wiley.png";
       case wiley:
+        return "assets/images/windsor.png";
+    }
+  }
+
+  static String fromDiningCourt(DiningCourt diningCourt) {
+    switch (diningCourt) {
+      case DiningCourt.earhart:
+        return "assets/images/earhart.png";
+      case DiningCourt.ford:
+        return "assets/images/ford.png";
+      case DiningCourt.hillenbrand:
+        return "assets/images/hillenbrand.png";
+      case DiningCourt.windsor:
+        return "assets/images/wiley.png";
+      case DiningCourt.wiley:
         return "assets/images/windsor.png";
     }
   }

@@ -63,11 +63,11 @@ class SwipeSwap extends StatelessWidget {
         ),
         home: const Wrapper(),
         routes: {
-          Routes.welcome.toString(): (context) => const Welcome(),
-          Routes.login.toString(): (context) => const Login(),
-          Routes.swaps.toString(): (context) => const Swaps(),
-          Routes.user.toString(): (context) => const User(),
-          Routes.order.toString(): (context) => const Order(),
+          Route.welcome.toString(): (context) => const Welcome(),
+          Route.login.toString(): (context) => const Login(),
+          Route.swaps.toString(): (context) => const Swaps(),
+          Route.user.toString(): (context) => const User(),
+          Route.order.toString(): (context) => const Order(),
         },
       );
     });

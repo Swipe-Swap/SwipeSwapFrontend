@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
             if (login != null) {
               // check if no login errors
               if (context.mounted) {
-                Navigator.pushNamed(context, Routes.swaps.toString());
+                Navigator.pushNamed(context, Route.swaps.toString());
               }
             } else {
               // login error
