@@ -23,11 +23,13 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   String diningCourt = '';
   final formKey = GlobalKey<FormState>();
-  final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter();
+  final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter(
+    symbol: '',
+  );
   TextEditingController orderDetailsController = TextEditingController();
   TextEditingController deliveryInstructionsController =
       TextEditingController();
-  String maxPrice = "10";
+  String maxPrice = "1000";
   var docId;
   String deliveryLocation = '';
   bool delivery = false;
@@ -110,6 +112,9 @@ class _OrderState extends State<Order> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
                   (snapshot.hasData)
                       ? Align(
                           alignment: Alignment.centerLeft,
@@ -126,10 +131,14 @@ class _OrderState extends State<Order> {
                         )
                       : const SizedBox(),
                   // Order details
+                  SizedBox(
+                    height: 3.h,
+                  ),
+
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.all(15.0.sp),
+                    child: SizedBox(
+                      // height: 10.h,
                       child: Text(
                         "Order Details",
                         style: TextStyle(
@@ -137,26 +146,30 @@ class _OrderState extends State<Order> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(15.sp, 5.sp, 0, 20.sp),
-                      child: SizedBox(
-                        height: 3.h,
-                        width: 80.w,
-                        child: TextFormField(
-                          controller: orderDetailsController,
-                          validator:
-                              Validatorless.required("Order cannot be blank!"),
-                          decoration: const InputDecoration(
-                            hintText: "Type details about your order here!",
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                    child: SizedBox(
+                      height: 8.h,
+                      width: 80.w,
+                      child: TextFormField(
+                        controller: orderDetailsController,
+                        validator:
+                            Validatorless.required("Order cannot be blank!"),
+                        decoration: const InputDecoration(
+                          // labelText: ,
+                          border: OutlineInputBorder(),
+
+                          hintText: "Type details about your order here!",
+                          hintStyle: TextStyle(
+                            color: Colors.white,
                           ),
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
                         ),
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
                       ),
                     ),
                   ),
