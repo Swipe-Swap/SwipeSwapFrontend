@@ -30,6 +30,7 @@ class _OrderState extends State<Order> {
     String _deliveryLocation = '';
     List<bool> _delivery = [true, false];
     return Scaffold(
+      appBar: AppBar(),
       body: Form(
         key: _formKey,
         child: Column(
@@ -65,16 +66,20 @@ class _OrderState extends State<Order> {
               },
             ),
             // Location
-            (_delivery[0])
-                ? MapLocationPicker(
-                    apiKey: dotenv.env['API_KEY']!,
-                    onNext: (GeocodingResult? result) {
-                      if (result != null) {
-                        _deliveryLocation = result.formattedAddress ?? "";
-                      }
-                    },
-                  )
-                : const Placeholder(),
+            // (_delivery[0])
+            //     ? SizedBox(
+            //         height: 100,
+            //         width: 100,
+            //         child: MapLocationPicker(
+            //           apiKey: dotenv.env['API_KEY']!,
+            //           onNext: (GeocodingResult? result) {
+            //             if (result != null) {
+            //               _deliveryLocation = result.formattedAddress ?? "";
+            //             }
+            //           },
+            //         ),
+            //       )
+            //     : const Placeholder(),
             // Delivery instructions
             (_delivery[0])
                 ? TextFormField(
