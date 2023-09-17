@@ -16,10 +16,13 @@ class DiningCourtWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, Routes.order.toString()),
       child: Container(
-        color: kAccentColor1,
-        child: Stack(
+        decoration: const BoxDecoration(
+            color: kAccentColor1,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(assetPath),
+            Opacity(opacity: 0.8, child: Image.asset(assetPath)),
             Text(assetText),
           ],
         ),

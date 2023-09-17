@@ -49,8 +49,12 @@ class SwipeSwap extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'SwipeSwap',
         theme: ThemeData(
-          textTheme: GoogleFonts.latoTextTheme(textTheme),
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          scaffoldBackgroundColor: kPrimaryColor1,
+          textTheme: GoogleFonts.latoTextTheme(
+              textTheme.apply(bodyColor: kPrimaryColor2)),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: kPrimaryColor1,
+          ),
           useMaterial3: true,
         ),
         home: const Wrapper(),
