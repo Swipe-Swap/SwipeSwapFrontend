@@ -1,4 +1,4 @@
-import 'package:swipeswap/screens/login.dart';
+import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 height: height * 0.7,
                 width: height * 0.7,
                 decoration: BoxDecoration(
-                    color: kPrimaryColor2,
+                    color: kSurface,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
@@ -89,7 +89,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                 height: height * 0.7,
                 width: height * 0.7,
                 decoration: BoxDecoration(
-                    color: kPrimaryColor2,
+                    color: kSurface,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
@@ -104,9 +104,6 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
             children: [
               page1(context),
               page2(context),
-              page3(context),
-              page4(context),
-              page5(context)
             ],
           ),
           Positioned(bottom: 20, child: nextButton(context)),
@@ -133,22 +130,21 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
     return Column(
       children: <Widget>[
         const SizedBox(height: 20),
+        Image.asset("assets/images/logo.png"),
         SizedBox(height: height * 0.04),
         Text(
-          'Hi,',
-          style: TextStyle(fontSize: width * 0.088, color: kPrimaryColor1),
-        ),
-        Text(
-          'This is Carora.',
-          style: TextStyle(fontSize: width * 0.075, color: kPrimaryColor1),
+          'Welcome to SwipeSwap.',
+          style: TextStyle(fontSize: width * 0.075),
         ),
         SizedBox(height: height * 0.07),
         SizedBox(
           width: width * 0.8,
           child: Text(
-            'Your personal elderly care assistant.',
+            'Repurpose your extra meal swipes.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
+            style: TextStyle(
+              fontSize: width * 0.055,
+            ),
           ),
         ),
       ],
@@ -161,105 +157,19 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
     return Column(
       children: <Widget>[
         SizedBox(height: height * 0.05),
+        Image.asset("assets/images/logo.png"),
         SizedBox(height: height * 0.065),
         Text(
-          'Reminders',
-          style: TextStyle(fontSize: width * 0.08, color: kPrimaryColor1),
+          'How It Works',
+          style: TextStyle(
+            fontSize: width * 0.08,
+          ),
         ),
         SizedBox(height: height * 0.06),
         Text(
-          'Remind the elder for',
+          'Sell your extra meal swipes to other students or buy cheaper dining court meals.',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
-        ),
-        DefaultTextStyle(
-          style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
-          child: AnimatedTextKit(repeatForever: true, animatedTexts: [
-            RotateAnimatedText('medicine.',
-                duration: const Duration(milliseconds: 1500)),
-            RotateAnimatedText('exercise.',
-                duration: const Duration(milliseconds: 1500)),
-            RotateAnimatedText('water.',
-                duration: const Duration(milliseconds: 1500)),
-            RotateAnimatedText('anything.',
-                duration: const Duration(milliseconds: 2000)),
-          ]),
-        ),
-      ],
-    );
-  }
-
-  Column page3(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        SizedBox(height: height * 0.05),
-        SizedBox(height: height * 0.065),
-        Text(
-          'Track Location',
-          style: TextStyle(fontSize: width * 0.08, color: kPrimaryColor1),
-        ),
-        SizedBox(height: height * 0.06),
-        SizedBox(
-          width: width * 0.8,
-          child: Text(
-            'See if your elder is in a safe place. Anytime, anywhere.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column page4(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        SizedBox(height: height * 0.05),
-        SizedBox(height: height * 0.065),
-        Text(
-          'Powerful Insights',
-          style: TextStyle(fontSize: width * 0.08, color: kPrimaryColor1),
-        ),
-        SizedBox(height: height * 0.06),
-        SizedBox(
-          width: width * 0.8,
-          child: Text(
-            'Know about the elder’s day in one beautiful page.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column page5(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        const SizedBox(height: 20),
-        SizedBox(height: height * 0.04),
-        Text(
-          'Easy to use',
-          style: TextStyle(fontSize: width * 0.08, color: kPrimaryColor1),
-        ),
-        SizedBox(height: height * 0.055),
-        SizedBox(
-          width: width * 0.8,
-          child: Text(
-            'Use the app on 2 devices, one for elder and one for the care-taker. \nEffortless, easy to use UI for elders. \nThe caretaker can add, update or view anything over the air.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: width * 0.055, color: kPrimaryColor1),
-          ),
-        ),
-        const Expanded(child: SizedBox()),
-        SizedBox(
-          height: 60 + (height * 0.06),
+          style: TextStyle(fontSize: width * 0.055),
         ),
       ],
     );
@@ -271,15 +181,20 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
       onTapCancel: onTapCancel,
       onTapUp: onTapUp,
       //Sign In with email and pswd widget
-      onTap: () {
-        if (currentPage != 4) {
+      onTap: () async {
+        if (currentPage != 1) {
           onNextTapped();
         } else {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Login(),
-              ));
+          final login = await AuthService().signInWithGoogle();
+          if (login != null) {
+            // check if no login errors
+            if (context.mounted) {
+              Navigator.pushNamed(context, Routes.swaps.toString());
+            }
+          } else {
+            // login error
+            //TODO Snackbar
+          }
         }
       },
       child: Transform.scale(
@@ -303,11 +218,11 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
             alignment: Alignment.center,
             children: [
               Visibility(
-                  visible: currentPage == 4 ? false : true,
+                  visible: currentPage == 1 ? false : true,
                   child: const Positioned(
                       right: 20, child: Icon(Icons.arrow_forward))),
               Text(
-                currentPage == 4 ? 'Get Started' : 'Next',
+                currentPage == 1 ? 'Get Started' : 'Next',
                 style: const TextStyle(
                   fontSize: 21,
                   color: kPrimaryColor1,

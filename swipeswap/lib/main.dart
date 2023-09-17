@@ -9,7 +9,6 @@ import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/screens/listing.dart';
 
 // Package imports
-import 'package:swipeswap/screens/login.dart';
 import 'package:swipeswap/screens/matching/matching.dart';
 import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/screens/swaps.dart';
@@ -74,7 +73,6 @@ class SwipeSwap extends StatelessWidget {
         home: const Wrapper(),
         routes: {
           Routes.welcome.toString(): (context) => const Welcome(),
-          Routes.login.toString(): (context) => const Login(),
           Routes.swaps.toString(): (context) => const Swaps(),
           Routes.user.toString(): (context) => const Profile(),
           Routes.order.toString(): (context) => const Order(),
