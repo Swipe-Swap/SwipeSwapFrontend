@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/utils/constants.dart';
 
@@ -14,11 +16,18 @@ class DiningCourtWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
+      onTap: () {
+        // Write to order provider
+        debugPrint(assetText);
+        Provider.of<OrderProvider>(context, listen: false)
+            .setDiningCourt(DiningCourt.fromString(assetText));
+        Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  Order(diningCourt: assetText.toLowerCase()))),
+            builder: (context) => const Order(),
+          ),
+        );
+      },
       child: Container(
         decoration: const BoxDecoration(
             color: kSurface,

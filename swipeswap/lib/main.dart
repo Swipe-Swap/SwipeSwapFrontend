@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:swipeswap/firebase_options.dart';
 import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
+import 'package:swipeswap/screens/listing.dart';
 
 // Package imports
 import 'package:swipeswap/screens/login.dart';
@@ -76,6 +77,8 @@ class SwipeSwap extends StatelessWidget {
           Routes.login.toString(): (context) => const Login(),
           Routes.swaps.toString(): (context) => const Swaps(),
           Routes.user.toString(): (context) => const Profile(),
+          Routes.order.toString(): (context) => const Order(),
+          Routes.listing.toString(): (context) => const Listing(),
         },
       );
     });

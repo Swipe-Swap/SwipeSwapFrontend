@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 final db = FirebaseFirestore.instance;
 
@@ -64,6 +65,7 @@ enum OrderStatus {
   }
 
   static OrderStatus fromString(String string) {
+    string = string.toLowerCase();
     switch (string) {
       case "listed":
         return OrderStatus.listed;
@@ -101,6 +103,24 @@ enum DiningCourt {
         return "ford";
       default:
         return "";
+    }
+  }
+
+  static DiningCourt fromString(String string) {
+    string = string.toLowerCase();
+    switch (string) {
+      case "earhart":
+        return DiningCourt.earhart;
+      case "hillenbrand":
+        return DiningCourt.hillenbrand;
+      case "wiley":
+        return DiningCourt.wiley;
+      case "windsor":
+        return DiningCourt.windsor;
+      case "ford":
+        return DiningCourt.ford;
+      default:
+        return DiningCourt.earhart;
     }
   }
 }

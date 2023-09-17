@@ -16,10 +16,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Order extends StatefulWidget {
-  final String diningCourt;
   const Order({
     super.key,
-    required this.diningCourt,
   });
 
   @override
@@ -27,6 +25,7 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  String diningCourt = '';
   final formKey = GlobalKey<FormState>();
   final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter();
   TextEditingController orderDetailsController = TextEditingController();
@@ -38,8 +37,18 @@ class _OrderState extends State<Order> {
   bool delivery = false;
   @override
   void initState() {
-    super.initState();
+    // Register callback that runs post first frame
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      String diningCourtValue =
+          Provider.of<OrderProvider>(context, listen: false)
+              .diningCourt
+              .toString();
+      setState(() {
+        diningCourt = diningCourtValue;
+      });
+    });
     maxPriceController.text = _formatter.format('1000');
+    super.initState();
   }
 
   @override
@@ -53,8 +62,8 @@ class _OrderState extends State<Order> {
             // Items to order
             TextFormField(
               controller: orderDetailsController,
-              decoration: const InputDecoration(
-                hintText: "Your order",
+              decoration: InputDecoration(
+                hintText: "Order from $diningCourt",
               ),
               validator: Validatorless.required("Order cannot be blank!"),
             ),
@@ -150,7 +159,7 @@ class _OrderState extends State<Order> {
                               deliveryInstructions:
                                   deliveryInstructionsController.text,
                               deliveryLocation: deliveryLocation,
-                              diningCourt: widget.diningCourt,
+                              diningCourt: diningCourt,
                               isDelivery: delivery,
                               orderDetails: orderDetailsController.text,
                               orderStatus: OrderStatus.listed,
