@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:swipeswap/screens/exchange.dart';
 
 final db = FirebaseFirestore.instance;
 
@@ -10,6 +11,7 @@ enum Routes {
   login,
   register,
   swaps,
+  exchange,
   user,
   order,
   listing,
@@ -23,6 +25,8 @@ enum Routes {
         return "/welcome";
       case login:
         return "/login";
+      case exchange:
+        return "/exchange";
       case register:
         return "/register";
       case swaps:
