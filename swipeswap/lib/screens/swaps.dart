@@ -42,7 +42,7 @@ class _SwapsState extends State<Swaps> with TickerProviderStateMixin {
         ),
         body: Column(
           children: [
-            const Orders(),
+            // const Orders(),
             Padding(
               padding: EdgeInsets.only(left: 5.w),
               child: Align(

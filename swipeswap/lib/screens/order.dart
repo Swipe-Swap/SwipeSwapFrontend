@@ -64,20 +64,20 @@ class _OrderState extends State<Order> {
               },
             ),
             // Location
-            // (_delivery[0])
-            //     ? SizedBox(
-            //         height: 100,
-            //         width: 100,
-            //         child: MapLocationPicker(
-            //           apiKey: dotenv.env['API_KEY']!,
-            //           onNext: (GeocodingResult? result) {
-            //             if (result != null) {
-            //               _deliveryLocation = result.formattedAddress ?? "";
-            //             }
-            //           },
-            //         ),
-            //       )
-            //     : const Placeholder(),
+            (delivery[0])
+                ? SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: MapLocationPicker(
+                      apiKey: dotenv.env['API_KEY']!,
+                      onNext: (GeocodingResult? result) {
+                        if (result != null) {
+                          deliveryLocation = result.formattedAddress ?? "";
+                        }
+                      },
+                    ),
+                  )
+                : const Placeholder(),
             // Delivery instructions
             (delivery[0])
                 ? TextFormField(
