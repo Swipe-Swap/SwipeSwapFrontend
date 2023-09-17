@@ -36,7 +36,6 @@ class _WrapperState extends State<Wrapper> {
         debugPrint('User is signed in!');
       }
     });
-    print(user);
   }
 
   @override
@@ -47,6 +46,8 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return FirebaseAuth.instance.currentUser == null ? const Welcome() : const Swaps();
+    return FirebaseAuth.instance.currentUser == null
+        ? const Welcome()
+        : const Swaps();
   }
 }

@@ -135,9 +135,9 @@ class _ListingState extends State<Listing> {
                 await db.collection("listings").add(
                       SwapListing.toJson(
                         SwapListing(
-                          basePrice:
-                              int.tryParse(_basePriceController.value.text) ??
-                                  5,
+                          basePrice: double.tryParse(
+                                  _basePriceController.value.text) ??
+                              5,
                           canDeliver: deliver,
                           diningCourt: diningCourt,
                           initialTime: null,

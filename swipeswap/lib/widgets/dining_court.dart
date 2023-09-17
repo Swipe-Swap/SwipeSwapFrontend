@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/utils/constants.dart';
 
 class DiningCourtWidget extends StatelessWidget {
@@ -13,7 +14,11 @@ class DiningCourtWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, Routes.order.toString()),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Order(diningCourt: assetText.toLowerCase()))),
       child: Container(
         decoration: const BoxDecoration(
             color: kSurface,

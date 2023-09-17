@@ -1,4 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +14,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Order extends StatefulWidget {
+  final String diningCourt;
   const Order({
     super.key,
+    required this.diningCourt,
   });
 
   @override
@@ -127,7 +131,7 @@ class _OrderState extends State<Order> {
             ElevatedButton(
               onPressed: () {
                 // Run validator for address
-                if (deliveryLocation.isEmpty) {
+                if (deliveryLocation.isEmpty && delivery) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
@@ -139,22 +143,16 @@ class _OrderState extends State<Order> {
                   db.collection("orders").add(
                         SwapOrder.toJson(
                           SwapOrder(
-                            deliveryInstructions:
-                                deliveryInstructionsController.text,
-                            deliveryLocation: deliveryLocation,
-                            diningCourt: Provider.of<OrderProvider>(context,
-                                    listen: false)
-                                .diningCourt
-                                .toString(),
-                            isDelivery: delivery,
-                            orderDetails: orderDetailsController.text,
-                            orderStatus: OrderStatus.listed,
-                            buyerId: Provider.of<UserProvider>(context,
-                                    listen: false)
-                                .user
-                                ?.uuid,
-                            sellerId: null,
-                          ),
+                              deliveryInstructions:
+                                  deliveryInstructionsController.text,
+                              deliveryLocation: deliveryLocation,
+                              diningCourt: widget.diningCourt,
+                              isDelivery: delivery,
+                              orderDetails: orderDetailsController.text,
+                              orderStatus: OrderStatus.listed,
+                              buyerId: FirebaseAuth.instance.currentUser?.uid,
+                              sellerId: "",
+                              timeListed: null),
                         ),
                       );
                   Navigator.pushNamed(context, Routes.matching.toString());

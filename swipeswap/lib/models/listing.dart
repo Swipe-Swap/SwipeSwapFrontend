@@ -1,5 +1,5 @@
 class SwapListing {
-  int basePrice;
+  double basePrice;
   bool canDeliver;
   String diningCourt;
   DateTime? initialTime;
