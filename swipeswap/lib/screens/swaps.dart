@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/screens/orders.dart';
+import 'package:swipeswap/screens/listing.dart';
+import 'package:swipeswap/screens/profile.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/utils/custom_nav_bar.dart';
