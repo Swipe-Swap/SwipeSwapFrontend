@@ -13,7 +13,8 @@ enum Routes {
   user,
   order,
   listing,
-  pendingOrders;
+  orders,
+  matching;
 
   @override
   String toString() {
@@ -32,8 +33,10 @@ enum Routes {
         return "/order";
       case listing:
         return "/listing";
-      case pendingOrders:
-        return "/pendingOrders";
+      case orders:
+        return "/orders";
+      case matching:
+        return "/matching";
       default:
         return "/swaps";
     }

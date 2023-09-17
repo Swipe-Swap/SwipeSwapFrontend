@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:swipeswap/screens/pendingOrder.dart';
+import 'package:swipeswap/screens/orders.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
@@ -87,7 +87,7 @@ class _SwapsState extends State<Swaps> {
         ),
         body: Column(
           children: [
-            const PendingOrder(),
+            const Orders(),
             Padding(
               padding: EdgeInsets.only(left: 5.w),
               child: Align(

@@ -119,6 +119,7 @@ class _OrderState extends State<Order> {
                           ),
                         ),
                       );
+                  Navigator.pushNamed(context, Routes.matching.toString());
                 }
               },
               child: const Text("Submit?"),
