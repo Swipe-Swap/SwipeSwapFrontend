@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 ///   - Listings (listings) (1)
 ///   - User Profile (user) (2)
 ///   - Logout (3)
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class CustomNavBar extends StatefulWidget implements PreferredSizeWidget {
+  const CustomNavBar({super.key});
 
   @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
+  State<CustomNavBar> createState() => _CustomNavBarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _CustomNavBarState extends State<CustomNavBar> {
   int index = 0;
   @override
   Widget build(BuildContext context) {

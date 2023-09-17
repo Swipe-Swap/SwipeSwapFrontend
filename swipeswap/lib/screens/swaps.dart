@@ -49,19 +49,19 @@ class _SwapsState extends State<Swaps> {
                 crossAxisCount: 2,
                 children: [
                   DiningCourtWidget(
-                      assetPath: Assets.earhart.toString(),
+                      assetPath: Asset.earhart.toString(),
                       assetText: "Earhart"),
                   DiningCourtWidget(
-                      assetPath: Assets.wiley.toString(), assetText: "Wiley"),
+                      assetPath: Asset.wiley.toString(), assetText: "Wiley"),
                   DiningCourtWidget(
-                      assetPath: Assets.windsor.toString(),
+                      assetPath: Asset.windsor.toString(),
                       assetText: "Windsor"),
                   DiningCourtWidget(
-                    assetPath: Assets.hillenbrand.toString(),
+                    assetPath: Asset.hillenbrand.toString(),
                     assetText: "Hillenbrand",
                   ),
                   DiningCourtWidget(
-                      assetPath: Assets.ford.toString(), assetText: "Ford"),
+                      assetPath: Asset.ford.toString(), assetText: "Ford"),
                 ],
               ),
             ),

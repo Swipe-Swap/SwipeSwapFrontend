@@ -31,7 +31,7 @@ class _OrderState extends State<Order> {
     String _deliveryLocation = '';
     List<bool> _delivery = [true, false];
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomNavBar(),
       body: Form(
         key: _formKey,
         child: Column(
