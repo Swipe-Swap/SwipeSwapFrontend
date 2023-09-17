@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeswap/models/order.dart';
-import 'package:swipeswap/models/user.dart';
 import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/utils/constants.dart';
@@ -22,21 +20,21 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    TextEditingController _orderDetailsController = TextEditingController();
-    TextEditingController _deliveryInstructionsController =
+    final formKey = GlobalKey<FormState>();
+    TextEditingController orderDetailsController = TextEditingController();
+    TextEditingController deliveryInstructionsController =
         TextEditingController();
-    TextEditingController _maxPriceController = TextEditingController();
-    String _deliveryLocation = '';
-    List<bool> _delivery = [true, false];
+    TextEditingController maxPriceController = TextEditingController();
+    String deliveryLocation = '';
+    List<bool> delivery = [true, false];
     return Scaffold(
       body: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             // Items to order
             TextFormField(
-              controller: _orderDetailsController,
+              controller: orderDetailsController,
               decoration: const InputDecoration(
                 hintText: "Your order",
               ),
@@ -44,7 +42,7 @@ class _OrderState extends State<Order> {
             ),
             // Max base price
             TextFormField(
-              controller: _maxPriceController,
+              controller: maxPriceController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: "Max base price (not accounting for delivery)",
@@ -60,25 +58,25 @@ class _OrderState extends State<Order> {
               children: const [Text("Pickup"), Text("Deliver")],
               onPressed: (value) {
                 setState(() {
-                  _delivery[value] = !_delivery[value];
+                  delivery[value] = !delivery[value];
                 });
               },
             ),
             // Location
-            (_delivery[0])
+            (delivery[0])
                 ? MapLocationPicker(
                     apiKey: dotenv.env['API_KEY']!,
                     onNext: (GeocodingResult? result) {
                       if (result != null) {
-                        _deliveryLocation = result.formattedAddress ?? "";
+                        deliveryLocation = result.formattedAddress ?? "";
                       }
                     },
                   )
                 : const Placeholder(),
             // Delivery instructions
-            (_delivery[0])
+            (delivery[0])
                 ? TextFormField(
-                    controller: _deliveryInstructionsController,
+                    controller: deliveryInstructionsController,
                     decoration: const InputDecoration(
                       hintText: "Delivery instructions",
                     ),
@@ -87,7 +85,7 @@ class _OrderState extends State<Order> {
             ElevatedButton(
               onPressed: () {
                 // Run validator for address
-                if (_deliveryLocation.isEmpty) {
+                if (deliveryLocation.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
@@ -100,14 +98,14 @@ class _OrderState extends State<Order> {
                         SwapOrder.toJson(
                           SwapOrder(
                             deliveryInstructions:
-                                _deliveryInstructionsController.text,
-                            deliveryLocation: _deliveryLocation,
+                                deliveryInstructionsController.text,
+                            deliveryLocation: deliveryLocation,
                             diningCourt: Provider.of<OrderProvider>(context,
                                     listen: false)
                                 .diningCourt
                                 .toString(),
-                            isDelivery: _delivery[0],
-                            orderDetails: _orderDetailsController.text,
+                            isDelivery: delivery[0],
+                            orderDetails: orderDetailsController.text,
                             orderStatus: OrderStatus.listed,
                             buyerId: Provider.of<UserProvider>(context,
                                     listen: false)

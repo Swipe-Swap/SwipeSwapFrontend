@@ -35,7 +35,6 @@ class _ProfileState extends State<Profile> {
               } else {
                 // TODO:  Handle logout error snackbar
               }
-              ;
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

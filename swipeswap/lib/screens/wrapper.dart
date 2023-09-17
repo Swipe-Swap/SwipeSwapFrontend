@@ -47,6 +47,6 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return FirebaseAuth.instance.currentUser == null ? Welcome() : Swaps();
+    return FirebaseAuth.instance.currentUser == null ? const Welcome() : const Swaps();
   }
 }
