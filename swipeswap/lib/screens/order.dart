@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swipeswap/models/user.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/widgets/custom_nav_bar.dart';
 import 'package:map_location_picker/map_location_picker.dart';
@@ -88,7 +90,8 @@ class _OrderState extends State<Order> {
                   );
                 } else {
                   // Submit data
-                  db.collection("orders").add(Order());
+                  final uid = FirebaseAuth.instance.currentUser?.uid.toString();
+                  // db.collection("orders").doc(uid).set(Order());
                 }
               },
               child: const Text("Submit?"),

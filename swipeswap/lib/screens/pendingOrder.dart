@@ -10,6 +10,9 @@ class PendingOrder extends StatefulWidget {
 class _PendingOrderState extends State<PendingOrder> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const SizedBox(
+      height: 0,
+      width: 0,
+    );
   }
 }

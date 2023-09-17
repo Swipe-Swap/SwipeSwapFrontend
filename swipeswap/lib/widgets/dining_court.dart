@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:swipeswap/utils/constants.dart';
 
 class DiningCourtWidget extends StatelessWidget {
@@ -14,11 +15,14 @@ class DiningCourtWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, Routes.order.toString()),
-      child: Stack(
-        children: [
-          Image.asset(assetPath),
-          Text(assetText),
-        ],
+      child: Container(
+        color: kAccentColor1,
+        child: Stack(
+          children: [
+            Image.asset(assetPath),
+            Text(assetText),
+          ],
+        ),
       ),
     );
   }

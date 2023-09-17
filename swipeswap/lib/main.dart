@@ -1,6 +1,7 @@
 // Flutter imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:swipeswap/firebase_options.dart';
 
 // Package imports
@@ -15,9 +16,10 @@ import 'package:swipeswap/screens/wrapper.dart';
 // Third-party dependency imports
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sizer/sizer.dart';
 
 void main() async {
-  await dotenv.load(fileName: "../.env");
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -41,21 +43,25 @@ class SwipeSwap extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SwipeSwap',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Wrapper(),
-      routes: {
-        Routes.welcome.toString(): (context) => const Welcome(),
-        Routes.login.toString(): (context) => const Login(),
-        Routes.swaps.toString(): (context) => const Swaps(),
-        Routes.user.toString(): (context) => const User(),
-        Routes.order.toString(): (context) => const Order(),
-      },
-    );
+    final textTheme = Theme.of(context).textTheme;
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SwipeSwap',
+        theme: ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(textTheme),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const Wrapper(),
+        routes: {
+          Routes.welcome.toString(): (context) => const Welcome(),
+          Routes.login.toString(): (context) => const Login(),
+          Routes.swaps.toString(): (context) => const Swaps(),
+          Routes.user.toString(): (context) => const User(),
+          Routes.order.toString(): (context) => const Order(),
+        },
+      );
+    });
   }
 }
