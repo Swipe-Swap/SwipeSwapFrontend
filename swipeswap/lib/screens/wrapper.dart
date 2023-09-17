@@ -25,7 +25,6 @@ class _WrapperState extends State<Wrapper> {
         SwapUser(
           email: user.email.toString(),
           userId: user.uid.toString(),
-          rating: -1,
           fullName: user.displayName.toString(),
           timeCreated: DateTime(0),
         );
