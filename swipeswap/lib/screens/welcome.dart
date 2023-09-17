@@ -2,7 +2,6 @@ import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 /// "By the students, for the students"
 /// "Savor the flavor, fund the future"

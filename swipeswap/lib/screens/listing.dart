@@ -40,9 +40,12 @@ class _ListingState extends State<Listing> {
       body: Form(
         child: Column(
           children: [
-            Text(
-              "Exchange your swipe",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Exchange your swipe",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+              ),
             ),
             // Dining court
             DropdownButtonFormField(
