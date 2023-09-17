@@ -66,8 +66,8 @@ class _OrderState extends State<Order> {
             // Location
             (delivery[0])
                 ? SizedBox(
-                    height: 100,
-                    width: 100,
+                    height: 500,
+                    width: 500,
                     child: MapLocationPicker(
                       apiKey: dotenv.env['API_KEY']!,
                       onNext: (GeocodingResult? result) {
