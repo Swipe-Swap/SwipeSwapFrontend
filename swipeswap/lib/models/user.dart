@@ -3,7 +3,7 @@ class SwapUser {
   DateTime dateCreated;
   DateTime? date;
   String fullName;
-  String? userId;
+  String? uuid;
   String email;
   String phoneNumber;
   // int? sellerRating;
@@ -12,7 +12,7 @@ class SwapUser {
     required this.currentLocation,
     required this.fullName,
     required this.email,
-    this.userId,
+    this.uuid,
     this.date,
     required this.phoneNumber,
     // this.sellerRating,
@@ -23,7 +23,7 @@ class SwapUser {
       currentLocation: responseData['currentLocation'],
       fullName: responseData['fullName'],
       email: responseData['email'],
-      userId: responseData['userId'],
+      uuid: responseData['uuid'],
       phoneNumber: responseData['phoneNumber'],
       // sellerRating: responseData["sellerRating"],
     );
@@ -34,7 +34,7 @@ class SwapUser {
       "currentLocation": user.currentLocation,
       "fullName": user.fullName,
       "email": user.email,
-      "userId": user.userId,
+      "userId": user.uuid,
       "phoneNumber": user.phoneNumber,
       // "sellerRating": user.sellerRating,
     };

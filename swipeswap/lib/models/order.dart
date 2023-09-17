@@ -41,7 +41,7 @@ class SwapOrder {
       "diningCourt": order.diningCourt,
       "isDelivery": order.isDelivery,
       "orderDetails": order.orderDetails,
-      "orderStatus": order.orderStatus,
+      "orderStatus": order.orderStatus.toString(),
       "buyerId": order.buyerId,
       "sellerId": order.sellerId,
     };

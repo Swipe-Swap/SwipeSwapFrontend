@@ -26,7 +26,7 @@ class _WrapperState extends State<Wrapper> {
         // TODO: come back to
         SwapUser(
           email: user.email.toString(),
-          userId: user.uid.toString(),
+          uuid: user.uid.toString(),
           currentLocation: "0, 0",
           // sellerRating: null,
           fullName: user.displayName.toString(),

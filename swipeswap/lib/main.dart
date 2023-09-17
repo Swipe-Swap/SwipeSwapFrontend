@@ -2,6 +2,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:swipeswap/firebase_options.dart';
+import 'package:swipeswap/provider/order_provider.dart';
+import 'package:swipeswap/provider/user_provider.dart';
 
 // Package imports
 import 'package:swipeswap/screens/login.dart';
@@ -23,15 +25,17 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    // MultiProvider(
-    // providers: [
-    // ChangeNotifierProvider<>(create: create),
-    // ChangeNotifierProvider<>(create: create),
-    // ChangeNotifierProvider<>(create: create),
-    // ],
-    // child: const SwipeSwap(),
-    // ),
-    const SwipeSwap(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(
+            create: (context) => UserProvider()),
+        ChangeNotifierProvider<OrderProvider>(
+            create: (context) => OrderProvider()),
+        // ChangeNotifierProvider<ListingProvider>(create: create),
+      ],
+      child: const SwipeSwap(),
+    ),
+    // const SwipeSwap(),
   );
 }
 
