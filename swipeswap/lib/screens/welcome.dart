@@ -288,14 +288,14 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
           height: 60,
           width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
-              color: kAccentColor2,
+              color: kAccentGreen,
               borderRadius: const BorderRadius.all(
                 Radius.circular(15.0),
               ),
               boxShadow: [
                 BoxShadow(
                     blurRadius: 8,
-                    color: kAccentColor2
+                    color: kAccentGreen
                         .withOpacity(0.35 * _buttonAnimationController.value),
                     offset: const Offset(0, 6)),
               ]),

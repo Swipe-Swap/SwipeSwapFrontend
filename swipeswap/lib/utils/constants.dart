@@ -148,6 +148,7 @@ enum Asset {
 const Color kPrimaryColor1 = Color(0xFF1c1e20);
 const Color kPrimaryColor2 = Color(0xFFF8F5F1);
 const Color kSecondaryColor = Color(0xFFF8A488);
-const Color kAccentColor1 = Color(0xFF23262b);
-const Color kAccentColor2 = Color(0xFF22C39A);
+const Color kSurface = Color(0xFF23262b);
+const Color kAccentGreen = Color(0xFFd1e2c3);
 const Color kAccentColor3 = Color.fromARGB(255, 123, 141, 201);
+const Color kAccentRed = Color(0xFFddc8c8);

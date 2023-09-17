@@ -1,4 +1,7 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/listing.dart';
@@ -15,12 +18,22 @@ class Listing extends StatefulWidget {
 
 class _ListingState extends State<Listing> {
   String diningCourt = DiningCourt.earhart.toString();
+  final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter(
+    symbol: '',
+  );
   final TextEditingController _rangeMilesController = TextEditingController();
   final TimeOfDay _time =
       TimeOfDay.fromDateTime(DateTime.now().add(const Duration(hours: 1)));
   final TextEditingController _milePriceController = TextEditingController();
   final TextEditingController _basePriceController = TextEditingController();
-  final List<bool> _delivery = [true, false];
+  bool deliver = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _basePriceController.text = _formatter.format('1000');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +46,14 @@ class _ListingState extends State<Listing> {
             ),
             // Dining court
             DropdownButtonFormField(
+                dropdownColor: kPrimaryColor1,
                 value: diningCourt,
                 items: [
-                  for (DiningCourt diningCourt in DiningCourt.values)
+                  for (DiningCourt court in DiningCourt.values)
                     DropdownMenuItem(
-                        value: diningCourt.toString(), child: const Text("earhart")),
+                      value: court.toString(),
+                      child: Text(court.toString()),
+                    )
                 ],
                 onChanged: (value) {
                   setState(() {
@@ -47,24 +63,19 @@ class _ListingState extends State<Listing> {
             // Base price
             TextFormField(
               controller: _basePriceController,
+              // initialValue: _formatter.format('2000'),
+              inputFormatters: <TextInputFormatter>[_formatter],
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText:
-                    "Base price for your swipe (not accounting for delivery)",
-                hintStyle:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+                hintText: "Base price for your swipe",
+                hintStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.sp,
+                    color: kPrimaryColor2.withOpacity(0.2)),
               ),
-              validator: Validatorless.multiple([
-                Validatorless.min(1, 'The price must be greater than 1'),
-                Validatorless.max(20, 'The price must be less than 20'),
-                Validatorless.required("Price cannot be blank!")
-              ]),
             ),
             // Expiration time
-            Text(
-              "How long do you want the listing to be available?",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-            ),
+
             // ElevatedButton(
             //     onPressed: () {
             //       setState(() async {
@@ -80,63 +91,63 @@ class _ListingState extends State<Listing> {
               "Would you be willing to deliver?",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
             ),
-            ToggleButtons(
-              isSelected: const [true, false],
-              children: const [Text("Pickup"), Text("Deliver")],
-              onPressed: (value) {
-                setState(() {
-                  _delivery[value] = !_delivery[value];
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      deliver = false;
+                    });
+                  },
+                  child: Container(
+                    height: 6.h,
+                    width: 25.w,
+                    decoration: BoxDecoration(
+                      color: !deliver ? kAccentRed : kSurface,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(child: Text("No")),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      deliver = true;
+                    });
+                  },
+                  child: Container(
+                    height: 6.h,
+                    width: 25.w,
+                    decoration: BoxDecoration(
+                      color: deliver ? kAccentGreen : kSurface,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(child: Text("Yes")),
+                  ),
+                ),
+              ],
             ),
-            // Delivery fee
-            Text(
-              "Set your delivery fee (per mile)",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-            ),
-            (_delivery[0])
-                ? TextFormField(
-                    controller: _milePriceController,
-                    keyboardType: TextInputType.number,
-                    validator: Validatorless.multiple([
-                      Validatorless.min(1, 'The price must be greater than 1'),
-                      Validatorless.max(10, 'The price must be less than 20'),
-                      Validatorless.required("Price cannot be blank!")
-                    ]),
-                  )
-                : const Placeholder(),
-            // Range Miles
-            Text(
-              "How far are you willing to go to deliver?",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-            ),
-            TextFormField(
-              controller: _rangeMilesController,
-              keyboardType: TextInputType.number,
-            ),
-            // Submission Button
+            deliver ? deliveryStuff() : const SizedBox(), // Submission Button
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Submit data
-                db.collection("listings").add(
+                await db.collection("listings").add(
                       SwapListing.toJson(
                         SwapListing(
                           basePrice:
                               int.tryParse(_basePriceController.value.text) ??
                                   5,
-                          canDeliver: _delivery[0],
+                          canDeliver: deliver,
                           diningCourt: diningCourt,
-                          initial: null,
+                          initialTime: null,
                           // NOTE: hopefully this works
-                          expiration: DateTime.tryParse(_time.toString()),
+                          expirationTime: DateTime.tryParse(_time.toString()),
                           milePrice:
                               int.tryParse(_milePriceController.text) ?? 5,
                           rangeMiles:
                               int.tryParse(_rangeMilesController.text) ?? 1,
-                          sellerId: Provider.of<ListingProvider>(context,
-                                  listen: false)
-                              .seller
-                              ?.uuid,
+                          sellerId: FirebaseAuth.instance.currentUser?.uid,
                         ),
                       ),
                     );
@@ -146,6 +157,36 @@ class _ListingState extends State<Listing> {
           ],
         ),
       ),
+    );
+  }
+
+  Column deliveryStuff() {
+    return Column(
+      children: [
+        // Delivery fee
+        Text(
+          "Set your delivery fee (per mile)",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+        ),
+        TextFormField(
+          controller: _milePriceController,
+          keyboardType: TextInputType.number,
+          validator: Validatorless.multiple([
+            Validatorless.min(1, 'The price must be greater than 1'),
+            Validatorless.max(10, 'The price must be less than 20'),
+            Validatorless.required("Price cannot be blank!")
+          ]),
+        ),
+        // Range Miles
+        Text(
+          "How far are you willing to go to deliver?",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+        ),
+        TextFormField(
+          controller: _rangeMilesController,
+          keyboardType: TextInputType.number,
+        ),
+      ],
     );
   }
 }

@@ -16,7 +16,7 @@ class DiningCourtWidget extends StatelessWidget {
       onTap: () => Navigator.pushNamed(context, Routes.order.toString()),
       child: Container(
         decoration: const BoxDecoration(
-            color: kAccentColor1,
+            color: kSurface,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

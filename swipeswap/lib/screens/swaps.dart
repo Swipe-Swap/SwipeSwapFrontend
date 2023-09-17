@@ -37,7 +37,7 @@ class _SwapsState extends State<Swaps> with TickerProviderStateMixin {
             child: DotNavigationBar(
               paddingR: EdgeInsets.symmetric(vertical: 0.65.h, horizontal: 8.w),
               marginR: const EdgeInsets.all(0),
-              backgroundColor: kAccentColor1,
+              backgroundColor: kSurface,
               currentIndex: SelectedTab.values.indexOf(_selectedTab),
               borderRadius: 22,
               onTap: _handleIndexChanged,

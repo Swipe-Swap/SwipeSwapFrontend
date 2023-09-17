@@ -1,5 +1,8 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/order.dart';
 import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
@@ -18,15 +21,23 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  final formKey = GlobalKey<FormState>();
+  final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter();
+  TextEditingController orderDetailsController = TextEditingController();
+  TextEditingController deliveryInstructionsController =
+      TextEditingController();
+  TextEditingController maxPriceController = TextEditingController();
+
+  String deliveryLocation = '';
+  bool delivery = false;
+  @override
+  void initState() {
+    super.initState();
+    maxPriceController.text = _formatter.format('1000');
+  }
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    TextEditingController orderDetailsController = TextEditingController();
-    TextEditingController deliveryInstructionsController =
-        TextEditingController();
-    TextEditingController maxPriceController = TextEditingController();
-    String deliveryLocation = '';
-    List<bool> delivery = [true, false];
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -44,27 +55,15 @@ class _OrderState extends State<Order> {
             // Max base price
             TextFormField(
               controller: maxPriceController,
+              // initialValue: _formatter.format('2000'),
+              inputFormatters: <TextInputFormatter>[_formatter],
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
-                hintText: "Max base price (not accounting for delivery)",
-              ),
-              validator: Validatorless.multiple([
-                Validatorless.min(1, 'The price must be greater than 1'),
-                Validatorless.max(20, 'The price must be less than 20'),
-                Validatorless.required("Price cannot be blank!")
-              ]),
-            ),
-            ToggleButtons(
-              isSelected: const [true, false],
-              children: const [Text("Pickup"), Text("Deliver")],
-              onPressed: (value) {
-                setState(() {
-                  delivery[value] = !delivery[value];
-                });
-              },
+                  // hintText: "Max base price (not accounting for delivery)",
+                  ),
             ),
             // Location
-            (delivery[0])
+            (delivery)
                 ? SizedBox(
                     height: 100,
                     width: 100,
@@ -77,16 +76,54 @@ class _OrderState extends State<Order> {
                       },
                     ),
                   )
-                : const Placeholder(),
+                : const SizedBox(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      delivery = false;
+                    });
+                  },
+                  child: Container(
+                    height: 6.h,
+                    width: 25.w,
+                    decoration: BoxDecoration(
+                      color: !delivery ? kAccentRed : kSurface,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(child: Text("No")),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      delivery = true;
+                    });
+                  },
+                  child: Container(
+                    height: 6.h,
+                    width: 25.w,
+                    decoration: BoxDecoration(
+                      color: delivery ? kAccentGreen : kSurface,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(child: Text("Yes")),
+                  ),
+                ),
+              ],
+            ),
+
             // Delivery instructions
-            (delivery[0])
+            (delivery)
                 ? TextFormField(
                     controller: deliveryInstructionsController,
                     decoration: const InputDecoration(
                       hintText: "Delivery instructions",
                     ),
                   )
-                : const Placeholder(),
+                : const SizedBox(),
             ElevatedButton(
               onPressed: () {
                 // Run validator for address
@@ -109,7 +146,7 @@ class _OrderState extends State<Order> {
                                     listen: false)
                                 .diningCourt
                                 .toString(),
-                            isDelivery: delivery[0],
+                            isDelivery: delivery,
                             orderDetails: orderDetailsController.text,
                             orderStatus: OrderStatus.listed,
                             buyerId: Provider.of<UserProvider>(context,

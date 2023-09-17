@@ -11,25 +11,25 @@ class SwapListing {
   SwapListing({
     this.basePrice = 10,
     this.canDeliver = false,
-    DateTime? initial,
-    DateTime? expiration,
+    DateTime? initialTime,
+    DateTime? expirationTime,
     required this.diningCourt,
     this.milePrice = 5,
     this.rangeMiles = 1,
     this.sellerId,
-  })  : initialTime = initial ?? DateTime.now(),
+  })  : initialTime = initialTime ?? DateTime.now(),
         expirationTime =
-            expiration ?? DateTime.now().add(const Duration(hours: 1));
+            expirationTime ?? DateTime.now().add(const Duration(hours: 1));
 
   factory SwapListing.fromJson(Map<String, dynamic> responseData) {
     return SwapListing(
       basePrice: responseData['basePrice'],
       canDeliver: responseData['canDeliver'],
       diningCourt: responseData['diningCourt'],
-      expiration: responseData['expirationTime'],
+      expirationTime: responseData['expirationTime'],
       milePrice: responseData['milePrice'],
       rangeMiles: responseData['rangeMiles'],
-      initial: responseData['initialTime'],
+      initialTime: responseData['initialTime'],
       sellerId: responseData['sellerId'],
     );
   }
@@ -39,11 +39,11 @@ class SwapListing {
       "basePrice": listing.basePrice,
       "canDeliver": listing.canDeliver,
       "diningCourt": listing.diningCourt,
-      "expiration": listing.expirationTime,
+      "expirationTime": listing.expirationTime,
       "milePrice": listing.milePrice,
       "rangeMiles": listing.rangeMiles,
-      "initial": listing.initialTime,
-      "sellerId": listing.basePrice,
+      "initialTime": listing.initialTime,
+      "sellerId": listing.sellerId,
     };
   }
 }
