@@ -2,7 +2,9 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:swipeswap/screens/listing.dart';
 import 'package:swipeswap/screens/pendingOrder.dart';
+import 'package:swipeswap/screens/profile.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
@@ -18,7 +20,7 @@ class Swaps extends StatefulWidget {
 
 class _SwapsState extends State<Swaps> with TickerProviderStateMixin {
   var _selectedTab = _SelectedTab.home;
-
+  late final pages = [swapsGrid(), Listing(), Profile()];
   void _handleIndexChanged(int i) {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
@@ -82,25 +84,8 @@ class _SwapsState extends State<Swaps> with TickerProviderStateMixin {
             ),
           ),
         ),
-        appBar: AppBar(
-          leading: GestureDetector(
-              onTap: () async {
-                final logout = await AuthService().signOut();
-                if (logout!) {
-                  if (context.mounted) {
-                    Navigator.pushNamed(context, Routes.login.toString());
-                  }
-                } else {
-                  // TODO:  Handle logout error snackbar
-                }
-                ;
-              },
-              child: const Icon(
-                Icons.logout,
-                color: Colors.redAccent,
-              )),
-        ),
-        body: swapsGrid(),
+        appBar: AppBar(),
+        body: pages[_SelectedTab.values.indexOf(_selectedTab)],
       ),
     );
   }

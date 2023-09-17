@@ -5,7 +5,6 @@ import 'package:swipeswap/models/listing.dart';
 import 'package:swipeswap/provider/listing_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/widgets/custom_nav_bar.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -27,7 +26,6 @@ class _ListingState extends State<Listing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomNavBar(),
       body: Form(
         child: Column(
           children: [
@@ -41,12 +39,7 @@ class _ListingState extends State<Listing> {
                 items: [
                   for (DiningCourt diningCourt in DiningCourt.values)
                     DropdownMenuItem(
-                      value: diningCourt.toString(),
-                      child: DiningCourtWidget(
-                        assetPath: Asset.fromDiningCourt(diningCourt),
-                        assetText: diningCourt.toString(),
-                      ),
-                    ),
+                        value: diningCourt.toString(), child: Text("earhart")),
                 ],
                 onChanged: (value) {
                   setState(() {
@@ -74,16 +67,16 @@ class _ListingState extends State<Listing> {
               "How long do you want the listing to be available?",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() async {
-                    _time = await showDialog(
-                        context: context,
-                        builder: (context) =>
-                            TimePickerDialog(initialTime: _time));
-                  });
-                },
-                child: Text(_time.toString())),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       setState(() async {
+            //         _time = await showDialog(
+            //             context: context,
+            //             builder: (context) =>
+            //                 TimePickerDialog(initialTime: _time));
+            //       });
+            //     },
+            //     child: Text(_time.toString())),
             // Delivery boolean
             Text(
               "Would you be willing to deliver?",
