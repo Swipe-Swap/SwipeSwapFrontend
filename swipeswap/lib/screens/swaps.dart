@@ -4,7 +4,6 @@ import 'package:swipeswap/screens/pendingOrder.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
-import 'package:sizer/sizer.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
 /// Main application page
@@ -21,36 +20,52 @@ class _SwapsState extends State<Swaps> {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: DotNavigationBar(
-          backgroundColor: kAccentColor1,
-          currentIndex: 0,
-          onTap: (p0) {},
-          dotIndicatorColor: Colors.black,
-          // enableFloatingNavBar: false
-          items: [
-            DotNavigationBarItem(
-              icon: Icon(Icons.home),
-              selectedColor: Colors.purple,
-            ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 30.0),
+          child: Container(
+            child: DotNavigationBar(
+              paddingR: EdgeInsets.only(bottom: 5, top: 5),
+              marginR: EdgeInsets.all(0),
+              backgroundColor: kAccentColor1,
+              currentIndex: 0,
+              onTap: (p0) {},
+              dotIndicatorColor: Colors.black,
+              boxShadow: const [],
+              // enableFloatingNavBar: false
+              items: [
+                DotNavigationBarItem(
+                  icon: const Icon(
+                    Icons.home,
+                  ),
+                  selectedColor: kAccentColor3,
+                ),
 
-            /// Likes
-            DotNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              selectedColor: Colors.pink,
-            ),
+                /// Likes
+                DotNavigationBarItem(
+                  icon: Icon(
+                    Icons.favorite_border,
+                  ),
+                  selectedColor: Colors.pink,
+                ),
 
-            /// Search
-            DotNavigationBarItem(
-              icon: Icon(Icons.search),
-              selectedColor: Colors.orange,
-            ),
+                /// Search
+                DotNavigationBarItem(
+                  icon: Icon(
+                    Icons.search,
+                  ),
+                  selectedColor: Colors.orange,
+                ),
 
-            /// Profile
-            DotNavigationBarItem(
-              icon: Icon(Icons.person),
-              selectedColor: Colors.teal,
+                /// Profile
+                DotNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  selectedColor: Colors.teal,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
         appBar: AppBar(
           leading: GestureDetector(

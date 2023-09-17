@@ -132,4 +132,4 @@ const Color kPrimaryColor2 = Color(0xFFF8F5F1);
 const Color kSecondaryColor = Color(0xFFF8A488);
 const Color kAccentColor1 = Color(0xFF23262b);
 const Color kAccentColor2 = Color(0xFF22C39A);
-const Color kAccentColor3 = Color(0xFFDB5757);
+const Color kAccentColor3 = Color(0xFF587ad1);
