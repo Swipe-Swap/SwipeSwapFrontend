@@ -24,13 +24,19 @@ class _SwapsState extends State<Swaps> {
           padding: const EdgeInsets.only(bottom: 30.0),
           child: Container(
             child: DotNavigationBar(
-              paddingR: EdgeInsets.only(bottom: 5, top: 5),
+              paddingR: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 3.w),
               marginR: EdgeInsets.all(0),
               backgroundColor: kAccentColor1,
               currentIndex: 0,
               onTap: (p0) {},
               dotIndicatorColor: Colors.black,
-              boxShadow: const [],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 12,
+                  blurStyle: BlurStyle.outer,
+                )
+              ],
               // enableFloatingNavBar: false
               items: [
                 DotNavigationBarItem(
@@ -42,27 +48,21 @@ class _SwapsState extends State<Swaps> {
 
                 /// Likes
                 DotNavigationBarItem(
-                  icon: Icon(
-                    Icons.favorite_border,
+                  icon: const Icon(
+                    Icons.edit_note_outlined,
                   ),
-                  selectedColor: Colors.pink,
+                  selectedColor: kAccentColor3,
                 ),
 
                 /// Search
                 DotNavigationBarItem(
-                  icon: Icon(
-                    Icons.search,
+                  icon: const Icon(
+                    Icons.person,
                   ),
-                  selectedColor: Colors.orange,
+                  selectedColor: kAccentColor3,
                 ),
 
                 /// Profile
-                DotNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                  ),
-                  selectedColor: Colors.teal,
-                ),
               ],
             ),
           ),
