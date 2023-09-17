@@ -34,16 +34,16 @@ class SwapListing {
     );
   }
 
-  static Map<String, dynamic> toJson(Map<String, dynamic> responseData) {
+  static Map<String, dynamic> toJson(SwapListing listing) {
     return {
-      basePrice: responseData['basePrice'],
-      canDeliver: responseData['canDeliver'],
-      diningCourt: responseData['diningCourt'],
-      expiration: responseData['expirationTime'],
-      milePrice: responseData['milePrice'],
-      rangeMiles: responseData['rangeMiles'],
-      initial: responseData['initialTime'],
-      sellerId: responseData['sellerId'],
+      "basePrice": listing.basePrice,
+      "canDeliver": listing.canDeliver,
+      "diningCourt": listing.diningCourt,
+      "expiration": listing.expirationTime,
+      "milePrice": listing.milePrice,
+      "rangeMiles": listing.rangeMiles,
+      "initial": listing.initialTime,
+      "sellerId": listing.basePrice,
     };
   }
 }
