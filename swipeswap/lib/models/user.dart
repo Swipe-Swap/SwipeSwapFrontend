@@ -2,9 +2,9 @@ class SwapUser {
   String currentLocation;
   DateTime dateCreated;
   String fullName;
-  String? userId;
-  String phoneNumber;
-  int? sellerRating;
+  String email;
+  double rating;
+  DateTime timeCreated;
 
   SwapUser({
     required this.currentLocation,
@@ -19,6 +19,7 @@ class SwapUser {
     return SwapUser(
         userId: responseData['id'],
         fullName: responseData['fullName'],
+        email: responseData['email'],
         timeCreated: responseData['timeCreated'],
         rating: responseData['rating']);
   }
