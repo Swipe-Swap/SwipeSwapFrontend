@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:swipeswap/screens/exchange.dart';
 
 final db = FirebaseFirestore.instance;
+final CurrencyTextInputFormatter formatter =
+    CurrencyTextInputFormatter(symbol: '');
 
 /// Enum containing routes
 enum Routes {
