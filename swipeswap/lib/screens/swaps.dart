@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:swipeswap/screens/pendingOrder.dart';
 import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
@@ -37,22 +38,33 @@ class _SwapsState extends State<Swaps> {
       body: Column(
         children: [
           PendingOrder(),
-          GridView.count(
-            crossAxisCount: 2,
-            children: [
-              DiningCourtWidget(
-                  assetPath: Assets.earhart.toString(), assetText: "Earhart"),
-              DiningCourtWidget(
-                  assetPath: Assets.wiley.toString(), assetText: "Wiley"),
-              DiningCourtWidget(
-                  assetPath: Assets.windsor.toString(), assetText: "Windsor"),
-              DiningCourtWidget(
-                assetPath: Assets.hillenbrand.toString(),
-                assetText: "Hillenbrand",
+          Text("Choose a Dining Court"),
+          Expanded(
+            child: Center(
+              child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                mainAxisSpacing: 5.h,
+                crossAxisSpacing: 10.w,
+                crossAxisCount: 2,
+                children: [
+                  DiningCourtWidget(
+                      assetPath: Assets.earhart.toString(),
+                      assetText: "Earhart"),
+                  DiningCourtWidget(
+                      assetPath: Assets.wiley.toString(), assetText: "Wiley"),
+                  DiningCourtWidget(
+                      assetPath: Assets.windsor.toString(),
+                      assetText: "Windsor"),
+                  DiningCourtWidget(
+                    assetPath: Assets.hillenbrand.toString(),
+                    assetText: "Hillenbrand",
+                  ),
+                  DiningCourtWidget(
+                      assetPath: Assets.ford.toString(), assetText: "Ford"),
+                ],
               ),
-              DiningCourtWidget(
-                  assetPath: Assets.ford.toString(), assetText: "Ford"),
-            ],
+            ),
           ),
         ],
       ),

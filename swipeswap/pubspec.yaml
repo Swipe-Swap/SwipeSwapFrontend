@@ -37,9 +37,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.1.0
+  google_fonts: ^6.0.0
   google_sign_in: ^6.1.5
   map_location_picker: ^1.2.6
   provider: ^6.0.5
+  sizer: ^2.0.15
   validatorless: ^1.2.3
 
 dev_dependencies:

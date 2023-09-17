@@ -34,9 +34,9 @@ class _WrapperState extends State<Wrapper> {
           phoneNumber: user.phoneNumber.toString(),
         );
         debugPrint('User is signed in!');
-        print(user);
       }
     });
+    print(user);
   }
 
   @override
