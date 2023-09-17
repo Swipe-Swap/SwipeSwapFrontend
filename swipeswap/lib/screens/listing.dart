@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/listing.dart';
 import 'package:swipeswap/provider/listing_provider.dart';
-import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/widgets/dining_court.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Listing extends StatefulWidget {
@@ -17,12 +15,12 @@ class Listing extends StatefulWidget {
 
 class _ListingState extends State<Listing> {
   String diningCourt = DiningCourt.earhart.toString();
-  TextEditingController _rangeMilesController = TextEditingController();
-  TimeOfDay _time =
+  final TextEditingController _rangeMilesController = TextEditingController();
+  final TimeOfDay _time =
       TimeOfDay.fromDateTime(DateTime.now().add(const Duration(hours: 1)));
-  TextEditingController _milePriceController = TextEditingController();
-  TextEditingController _basePriceController = TextEditingController();
-  List<bool> _delivery = [true, false];
+  final TextEditingController _milePriceController = TextEditingController();
+  final TextEditingController _basePriceController = TextEditingController();
+  final List<bool> _delivery = [true, false];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +37,7 @@ class _ListingState extends State<Listing> {
                 items: [
                   for (DiningCourt diningCourt in DiningCourt.values)
                     DropdownMenuItem(
-                        value: diningCourt.toString(), child: Text("earhart")),
+                        value: diningCourt.toString(), child: const Text("earhart")),
                 ],
                 onChanged: (value) {
                   setState(() {
