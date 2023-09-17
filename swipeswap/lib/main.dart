@@ -10,12 +10,14 @@ import 'package:swipeswap/screens/swaps.dart';
 import 'package:swipeswap/screens/user.dart';
 import 'package:swipeswap/screens/welcome.dart';
 import 'package:swipeswap/utils/constants.dart';
+import 'package:swipeswap/screens/wrapper.dart';
 
 // Third-party dependency imports
 import 'package:provider/provider.dart';
-import 'package:swipeswap/screens/wrapper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load(fileName: "../.env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
