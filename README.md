@@ -1,5 +1,6 @@
-# SwipeSwapFrontend
+# SwipeSwap
 
+![image](https://github.com/Swipe-Swap/SwipeSwapFrontend/assets/73580740/795751dc-4f4e-4280-9906-191d6e395982)
 
 # Inspiration
 
