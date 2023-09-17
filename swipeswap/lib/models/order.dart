@@ -10,18 +10,20 @@ class SwapOrder {
   String? buyerId;
   String? sellerId;
   DateTime? timeListed;
+  int maxPrice;
 
-  SwapOrder(
-      {required this.deliveryInstructions,
-      required this.deliveryLocation,
-      required this.diningCourt,
-      this.isDelivery = false,
-      required this.orderDetails,
-      required this.orderStatus,
-      this.buyerId,
-      this.sellerId,
-      DateTime? timeListed})
-      : timeListed = timeListed ?? DateTime.now();
+  SwapOrder({
+    required this.deliveryInstructions,
+    required this.deliveryLocation,
+    required this.diningCourt,
+    this.isDelivery = false,
+    required this.orderDetails,
+    required this.orderStatus,
+    this.buyerId,
+    this.sellerId,
+    DateTime? timeListed,
+    this.maxPrice = 10,
+  }) : timeListed = timeListed ?? DateTime.now();
 
   factory SwapOrder.fromJson(Map<String, dynamic> responseData) {
     return SwapOrder(
@@ -34,6 +36,7 @@ class SwapOrder {
       buyerId: responseData['buyerId'],
       sellerId: responseData['sellerId'],
       timeListed: responseData['timeListed'],
+      maxPrice: responseData['maxPrice'],
     );
   }
 

@@ -9,7 +9,6 @@ import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/screens/listing.dart';
 
 // Package imports
-import 'package:swipeswap/screens/matching/matching.dart';
 import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/screens/swaps.dart';
 import 'package:swipeswap/screens/profile.dart';
@@ -72,6 +71,7 @@ class SwipeSwap extends StatelessWidget {
         ),
         home: const Wrapper(),
         routes: {
+          // TODO: implement provider for variable routes
           Routes.welcome.toString(): (context) => const Welcome(),
           Routes.swaps.toString(): (context) => const Swaps(),
           Routes.user.toString(): (context) => const Profile(),

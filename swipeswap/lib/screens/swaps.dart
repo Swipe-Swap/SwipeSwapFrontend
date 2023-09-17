@@ -2,10 +2,8 @@ import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:swipeswap/screens/orders.dart';
 import 'package:swipeswap/screens/listing.dart';
 import 'package:swipeswap/screens/profile.dart';
-import 'package:swipeswap/services/auth.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:swipeswap/widgets/dining_court.dart';
 

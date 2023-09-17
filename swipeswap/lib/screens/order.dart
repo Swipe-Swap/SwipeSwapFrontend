@@ -1,18 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/order.dart';
 import 'package:swipeswap/provider/order_provider.dart';
-import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/screens/matching/matching.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:map_location_picker/map_location_picker.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Order extends StatefulWidget {
@@ -31,7 +27,7 @@ class _OrderState extends State<Order> {
   TextEditingController orderDetailsController = TextEditingController();
   TextEditingController deliveryInstructionsController =
       TextEditingController();
-  TextEditingController maxPriceController = TextEditingController();
+  String maxPrice = "10";
   var docId;
   String deliveryLocation = '';
   bool delivery = false;
@@ -47,140 +43,253 @@ class _OrderState extends State<Order> {
         diningCourt = diningCourtValue;
       });
     });
-    maxPriceController.text = _formatter.format('1000');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Form(
-        key: formKey,
-        child: Column(
-          children: [
-            // Items to order
-            TextFormField(
-              controller: orderDetailsController,
-              decoration: InputDecoration(
-                hintText: "Order from $diningCourt",
-              ),
-              validator: Validatorless.required("Order cannot be blank!"),
-            ),
-            // Max base price
-            TextFormField(
-              controller: maxPriceController,
-              // initialValue: _formatter.format('2000'),
-              inputFormatters: <TextInputFormatter>[_formatter],
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                  // hintText: "Max base price (not accounting for delivery)",
+    return FutureBuilder(
+        future: numSellers(int.tryParse(maxPrice) ?? 10),
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  // Title
+                  Text(
+                    "Order from $diningCourt",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                   ),
-            ),
-            // Location
-            (delivery)
-                ? SizedBox(
-                    height: 500,
-                    width: 500,
-                    child: MapLocationPicker(
-                      apiKey: dotenv.env['API_KEY']!,
-                      onNext: (GeocodingResult? result) {
-                        if (result != null) {
-                          deliveryLocation = result.formattedAddress ?? "";
-                        }
-                      },
+                  // Max base price
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 10, horizontal: 3),
+                    child: Text(
+                      "Set your maximum price",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15.sp),
                     ),
-                  )
-                : const SizedBox(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      delivery = false;
-                    });
-                  },
-                  child: Container(
-                    height: 6.h,
-                    width: 25.w,
-                    decoration: BoxDecoration(
-                      color: !delivery ? kAccentRed : kSurface,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(child: Text("No")),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      delivery = true;
-                    });
-                  },
-                  child: Container(
-                    height: 6.h,
-                    width: 25.w,
-                    decoration: BoxDecoration(
-                      color: delivery ? kAccentGreen : kSurface,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(child: Text("Yes")),
-                  ),
-                ),
-              ],
-            ),
-
-            // Delivery instructions
-            (delivery)
-                ? TextFormField(
-                    controller: deliveryInstructionsController,
-                    decoration: const InputDecoration(
-                      hintText: "Delivery instructions",
-                    ),
-                  )
-                : const SizedBox(),
-            ElevatedButton(
-              onPressed: () async {
-                // Run validator for address
-                if (deliveryLocation.isEmpty && delivery) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                          "Address must be specified for an order to be delivered!"),
-                    ),
-                  );
-                } else {
-                  // Submit data
-                  await db
-                      .collection("orders")
-                      .add(
-                        SwapOrder.toJson(
-                          SwapOrder(
-                              deliveryInstructions:
-                                  deliveryInstructionsController.text,
-                              deliveryLocation: deliveryLocation,
-                              diningCourt: diningCourt,
-                              isDelivery: delivery,
-                              orderDetails: orderDetailsController.text,
-                              orderStatus: OrderStatus.listed,
-                              buyerId: FirebaseAuth.instance.currentUser?.uid,
-                              sellerId: "",
-                              timeListed: null),
+                  Padding(
+                    padding: EdgeInsets.all(5.sp),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.attach_money_outlined),
+                        // Max base price
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 1.h,
+                              width: 25.w,
+                              child: TextFormField(
+                                // controller: maxPriceController,
+                                initialValue: _formatter.format(maxPrice),
+                                inputFormatters: <TextInputFormatter>[
+                                  _formatter
+                                ],
+                                decoration: InputDecoration(
+                                  hintText: _formatter.format("1000"),
+                                  labelStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                                keyboardType: TextInputType.number,
+                                onChanged: (value) {
+                                  setState(() {
+                                    maxPrice = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            (snapshot.hasData)
+                                ? Padding(
+                                    padding: EdgeInsets.all(12.sp),
+                                    child: Text(
+                                      "${snapshot.data} sellers are available at this base price",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 7.sp,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ],
                         ),
-                      )
-                      .then((DocumentReference doc) => docId = doc.id);
+                      ],
+                    ),
+                  ),
+                  // Order details
+                  Text(
+                    "Order Details",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                    width: 30.w,
+                    child: SizedBox(
+                      height: 15.h,
+                      width: 25.w,
+                      child: TextFormField(
+                        controller: orderDetailsController,
+                        validator:
+                            Validatorless.required("Order cannot be blank!"),
+                        decoration: const InputDecoration(
+                            hintText:
+                                "Would you like your order to be delivered?"),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            delivery = false;
+                          });
+                        },
+                        child: Container(
+                          height: 6.h,
+                          width: 25.w,
+                          decoration: BoxDecoration(
+                            color: !delivery ? kAccentRed : kSurface,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(child: Text("No")),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            delivery = true;
+                          });
+                        },
+                        child: Container(
+                          height: 6.h,
+                          width: 25.w,
+                          decoration: BoxDecoration(
+                            color: delivery ? kAccentGreen : kSurface,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(child: Text("Yes")),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Location
+                  (delivery)
+                      ? Text(
+                          "Delivery Location",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15.sp),
+                        )
+                      : const SizedBox(),
+                  (delivery)
+                      // MAPS CODE (implement later)
+                      // ? SizedBox(
+                      //     height: 500,
+                      //     width: 500,
+                      //     child: MapLocationPicker(
+                      //       apiKey: dotenv.env['API_KEY']!,
+                      //       onNext: (GeocodingResult? result) {
+                      //         if (result != null) {
+                      //           deliveryLocation =
+                      //               result.formattedAddress ?? "";
+                      //         }
+                      //       },
+                      //     ),
+                      //   )
+                      // : const SizedBox(),
+                      ? SizedBox(
+                          height: 15.h,
+                          width: 35.w,
+                          child: TextFormField(
+                            // temporarily readonly
+                            readOnly: true,
+                            initialValue:
+                                "Ex: 355 N Martin Jischke Dr, West Lafayette, IN 47906",
+                          ),
+                        )
+                      : const SizedBox(),
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Matching(docID: docId)));
-                }
-              },
-              child: const Text("Submit?"),
+                  // Delivery instructions
+                  (delivery)
+                      ? Text(
+                          "Delivery Instructions",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15.sp),
+                        )
+                      : const SizedBox(),
+                  (delivery)
+                      ? TextFormField(
+                          controller: deliveryInstructionsController,
+                          decoration: const InputDecoration(
+                            hintText:
+                                "Special instructions for your delivery (optional)",
+                          ),
+                        )
+                      : const SizedBox(),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // Run validator for address
+                      if (deliveryLocation.isEmpty && delivery) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                                "Address must be specified for an order to be delivered!"),
+                          ),
+                        );
+                      } else {
+                        // Submit data
+                        await db
+                            .collection("orders")
+                            .add(
+                              SwapOrder.toJson(
+                                SwapOrder(
+                                  deliveryInstructions:
+                                      deliveryInstructionsController.text,
+                                  deliveryLocation: deliveryLocation,
+                                  diningCourt: diningCourt,
+                                  isDelivery: delivery,
+                                  orderDetails: orderDetailsController.text,
+                                  orderStatus: OrderStatus.listed,
+                                  buyerId:
+                                      FirebaseAuth.instance.currentUser?.uid,
+                                  sellerId: "",
+                                  timeListed: null,
+                                  maxPrice: int.tryParse(maxPrice) ?? 10,
+                                ),
+                              ),
+                            )
+                            .then((DocumentReference doc) => docId = doc.id);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Matching(docID: docId)));
+                      }
+                    },
+                    child: const Text("Submit?"),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
+}
+
+/// Retrieve numSellers
+Future<int> numSellers(int maxBasePrice) async {
+  QuerySnapshot<Map<String, dynamic>> querySnapshot = await db
+      .collection("listings")
+      .where("basePrice", isLessThanOrEqualTo: maxBasePrice)
+      .get();
+
+  return querySnapshot.size;
 }

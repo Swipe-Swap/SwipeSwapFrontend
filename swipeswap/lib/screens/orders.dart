@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/order.dart';
-import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/utils/constants.dart';
 
 List<SwapOrder> listedOrders = [];

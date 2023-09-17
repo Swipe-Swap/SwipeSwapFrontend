@@ -2,10 +2,8 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/listing.dart';
-import 'package:swipeswap/provider/listing_provider.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -110,7 +108,7 @@ class _ListingState extends State<Listing> {
                       color: !deliver ? kAccentRed : kSurface,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(child: Text("No")),
+                    child: const Center(child: Text("No")),
                   ),
                 ),
                 GestureDetector(
@@ -126,7 +124,7 @@ class _ListingState extends State<Listing> {
                       color: deliver ? kAccentGreen : kSurface,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(child: Text("Yes")),
+                    child: const Center(child: Text("Yes")),
                   ),
                 ),
               ],

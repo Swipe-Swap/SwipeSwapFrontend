@@ -25,11 +25,11 @@ class _MatchingState extends State<Matching> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
+            return const Text('Loading...');
           }
 
           if (!snapshot.hasData) {
-            return Text('Document does not exist');
+            return const Text('Document does not exist');
           }
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             if (widget.docID.toString() ==

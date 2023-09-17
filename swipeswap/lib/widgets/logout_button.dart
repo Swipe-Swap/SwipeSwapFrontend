@@ -27,7 +27,7 @@ class _ProfileState extends State<LogoutButton> {
           } else {
             // Handle logout error snackbar
             ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("That's an error!")));
+                .showSnackBar(const SnackBar(content: Text("That's an error!")));
           }
         },
         child: Row(
