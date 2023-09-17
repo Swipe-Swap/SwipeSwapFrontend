@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "142866795354",
+    "project_id": "swipeswap-b1544",
+    "storage_bucket": "swipeswap-b1544.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142866795354:android:63402a9718435167cd0163",
+        "android_client_info": {
+          "package_name": "com.example.swipeswap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142866795354-8ff889dob2bafva6gu89ppe9bhdn4ndp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7ZR6fq7bHf5v8L3cvmJ2tFVeP7_uhncg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142866795354-8ff889dob2bafva6gu89ppe9bhdn4ndp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
