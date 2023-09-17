@@ -83,7 +83,7 @@ class _SwapsState extends State<Swaps> with TickerProviderStateMixin {
             ),
           ),
         ),
-        appBar: AppBar(),
+        appBar: AppBar(automaticallyImplyLeading: false),
         body: pages[SelectedTab.values.indexOf(_selectedTab)],
       ),
     );

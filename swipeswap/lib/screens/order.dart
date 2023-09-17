@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/order.dart';
 import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
+import 'package:swipeswap/screens/matching/matching.dart';
 import 'package:swipeswap/utils/constants.dart';
 import 'package:map_location_picker/map_location_picker.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,7 +33,7 @@ class _OrderState extends State<Order> {
   TextEditingController deliveryInstructionsController =
       TextEditingController();
   TextEditingController maxPriceController = TextEditingController();
-
+  var docId;
   String deliveryLocation = '';
   bool delivery = false;
   @override
@@ -129,7 +131,7 @@ class _OrderState extends State<Order> {
                   )
                 : const SizedBox(),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Run validator for address
                 if (deliveryLocation.isEmpty && delivery) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -140,7 +142,9 @@ class _OrderState extends State<Order> {
                   );
                 } else {
                   // Submit data
-                  db.collection("orders").add(
+                  await db
+                      .collection("orders")
+                      .add(
                         SwapOrder.toJson(
                           SwapOrder(
                               deliveryInstructions:
@@ -154,8 +158,13 @@ class _OrderState extends State<Order> {
                               sellerId: "",
                               timeListed: null),
                         ),
-                      );
-                  Navigator.pushNamed(context, Routes.matching.toString());
+                      )
+                      .then((DocumentReference doc) => docId = doc.id);
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Matching(docID: docId)));
                 }
               },
               child: const Text("Submit?"),
