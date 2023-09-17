@@ -1,36 +1,42 @@
 class SwapUser {
   String currentLocation;
   DateTime dateCreated;
+  DateTime? date;
   String fullName;
   String? userId;
+  String email;
   String phoneNumber;
-  int? sellerRating;
+  // int? sellerRating;
 
   SwapUser({
     required this.currentLocation,
-    this.dateCreated,
     required this.fullName,
+    required this.email,
     this.userId,
+    this.date,
     required this.phoneNumber,
-    this.sellerRating,
-  }) : initialTime = initial ?? DateTime.now();
+    // this.sellerRating,
+  }) : dateCreated = date ?? DateTime.now();
 
   factory SwapUser.fromJson(Map<String, dynamic> responseData) {
     return SwapUser(
-        userId: responseData['id'],
-        fullName: responseData['fullName'],
-        timeCreated: responseData['timeCreated'],
-        rating: responseData['rating']);
+      currentLocation: responseData['currentLocation'],
+      fullName: responseData['fullName'],
+      email: responseData['email'],
+      userId: responseData['userId'],
+      phoneNumber: responseData['phoneNumber'],
+      // sellerRating: responseData["sellerRating"],
+    );
   }
 
   static Map<String, dynamic> toJson(SwapUser user) {
     return {
-      "deliveryInstructions": order.deliveryInstructions,
-      "deliveryLocation": order.deliveryLocation,
-      "diningCourt": order.diningCourt,
-      "isDelivery": order.isDelivery,
-      "orderDetails": order.orderDetails,
-      "orderStatus": order.orderStatus,
+      "currentLocation": user.currentLocation,
+      "fullName": user.fullName,
+      "email": user.email,
+      "userId": user.userId,
+      "phoneNumber": user.phoneNumber,
+      // "sellerRating": user.sellerRating,
     };
   }
 }

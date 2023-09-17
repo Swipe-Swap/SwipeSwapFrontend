@@ -22,12 +22,16 @@ class _WrapperState extends State<Wrapper> {
       if (user == null) {
         debugPrint('User is currently signed out!');
       } else {
+        // TODO: partly mock data
+        // TODO: come back to
         SwapUser(
           email: user.email.toString(),
           userId: user.uid.toString(),
-          rating: -1,
+          currentLocation: "0, 0",
+          // sellerRating: null,
           fullName: user.displayName.toString(),
-          timeCreated: DateTime(0),
+          date: null,
+          phoneNumber: user.phoneNumber.toString(),
         );
         debugPrint('User is signed in!');
         print(user);
