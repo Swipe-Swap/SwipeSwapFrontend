@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/models/order.dart';
 import 'package:swipeswap/screens/order.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/utils/custom_nav_bar.dart';
+
+List<SwapOrder> listedOrders = [];
+List<SwapOrder> pendingOrders = [];
+List<SwapOrder> completedOrders = [];
+List<SwapOrder> expiredOrders = [];
 
 /// Show listed, pending, completed, and expired orders
 class Orders extends StatefulWidget {
@@ -15,53 +20,9 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  List<SwapOrder> listedOrders = [];
-  List<SwapOrder> pendingOrders = [];
-  List<SwapOrder> completedOrders = [];
-  List<SwapOrder> expiredOrders = [];
-
   @override
-  void initState() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot = await db
-        .collection("listings")
-        .where("orderStatus", isEqualTo: OrderStatus.listed.toString())
-        .get();
-
-    for (var docSnapshot in querySnapshot.docs) {
-      SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
-      listedOrders.add(order);
-    }
-
-    querySnapshot = await db
-        .collection("listings")
-        .where("orderStatus", isEqualTo: OrderStatus.pending.toString())
-        .get();
-
-    for (var docSnapshot in querySnapshot.docs) {
-      SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
-      pendingOrders.add(order);
-    }
-
-    querySnapshot = await db
-        .collection("listings")
-        .where("orderStatus", isEqualTo: OrderStatus.completed.toString())
-        .get();
-
-    for (var docSnapshot in querySnapshot.docs) {
-      SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
-      completedOrders.add(order);
-    }
-
-    querySnapshot = await db
-        .collection("listings")
-        .where("orderStatus", isEqualTo: OrderStatus.expired.toString())
-        .get();
-
-    for (var docSnapshot in querySnapshot.docs) {
-      SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
-      expiredOrders.add(order);
-    }
-
+  void initState() {
+    init();
     super.initState();
   }
 
@@ -71,7 +32,6 @@ class _OrdersState extends State<Orders> {
     // Completed and expired below
     return Scaffold(
       appBar: AppBar(),
-      bottomNavigationBar: const CustomNavBar(),
       body: Column(children: [
         // Listed Orders
         (listedOrders.isNotEmpty)
@@ -107,5 +67,47 @@ class _OrdersState extends State<Orders> {
         (expiredOrders.isNotEmpty) ? ListView() : const Placeholder(),
       ]),
     );
+  }
+}
+
+Future init() async {
+  QuerySnapshot<Map<String, dynamic>> querySnapshot = await db
+      .collection("orders")
+      .where("orderStatus", isEqualTo: OrderStatus.listed.toString())
+      .get();
+
+  for (var docSnapshot in querySnapshot.docs) {
+    SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
+    listedOrders.add(order);
+  }
+
+  querySnapshot = await db
+      .collection("orders")
+      .where("orderStatus", isEqualTo: OrderStatus.pending.toString())
+      .get();
+
+  for (var docSnapshot in querySnapshot.docs) {
+    SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
+    pendingOrders.add(order);
+  }
+
+  querySnapshot = await db
+      .collection("orders")
+      .where("orderStatus", isEqualTo: OrderStatus.completed.toString())
+      .get();
+
+  for (var docSnapshot in querySnapshot.docs) {
+    SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
+    completedOrders.add(order);
+  }
+
+  querySnapshot = await db
+      .collection("orders")
+      .where("orderStatus", isEqualTo: OrderStatus.expired.toString())
+      .get();
+
+  for (var docSnapshot in querySnapshot.docs) {
+    SwapOrder order = SwapOrder.fromJson(docSnapshot.data());
+    expiredOrders.add(order);
   }
 }

@@ -63,6 +63,7 @@ class SwipeSwap extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             backgroundColor: kPrimaryColor1,
           ),
+          iconTheme: const IconThemeData(color: kPrimaryColor1),
           useMaterial3: true,
         ),
         home: const Wrapper(),

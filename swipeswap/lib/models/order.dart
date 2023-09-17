@@ -24,7 +24,7 @@ class SwapOrder {
   factory SwapOrder.fromJson(Map<String, dynamic> responseData) {
     return SwapOrder(
       deliveryInstructions: responseData['deliveryInstructions'],
-      deliveryLocation: responseData['delivryLocation'],
+      deliveryLocation: responseData['deliveryLocation'],
       diningCourt: responseData['diningCourt'],
       isDelivery: responseData['isDelivery'],
       orderDetails: responseData['orderDetails'],
