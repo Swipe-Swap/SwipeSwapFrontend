@@ -54,3 +54,5 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
+enum _SelectedTab { home, seller, user }
