@@ -76,6 +76,32 @@ enum OrderStatus {
   }
 }
 
+enum DiningCourt {
+  earhart,
+  hillenbrand,
+  wiley,
+  windsor,
+  ford;
+
+  @override
+  String toString() {
+    switch (this) {
+      case earhart:
+        return "earhart";
+      case hillenbrand:
+        return "hillenbrand";
+      case wiley:
+        return "wiley";
+      case windsor:
+        return "windsor";
+      case ford:
+        return "ford";
+      default:
+        return "";
+    }
+  }
+}
+
 enum Assets {
   earhart,
   ford,
