@@ -22,7 +22,7 @@ class _ProfileState extends State<LogoutButton> {
           final logout = await AuthService().signOut();
           if (logout!) {
             if (context.mounted) {
-              Navigator.pushNamed(context, Routes.login.toString());
+              Navigator.pushNamed(context, Routes.welcome.toString());
             }
           } else {
             // Handle logout error snackbar
