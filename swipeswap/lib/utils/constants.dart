@@ -1,6 +1,8 @@
 import 'dart:ui';
 
-import 'package:swipeswap/screens/pendingOrder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final db = FirebaseFirestore.instance;
 
 /// Enum containing routes
 enum Routes {
@@ -34,6 +36,42 @@ enum Routes {
         return "/pendingOrders";
       default:
         return "/swaps";
+    }
+  }
+}
+
+enum OrderStatus {
+  listed,
+  pending,
+  completed,
+  expired;
+
+  @override
+  String toString() {
+    switch (this) {
+      case listed:
+        return "listed";
+      case pending:
+        return "pending";
+      case completed:
+        return "completed";
+      case expired:
+        return "expired";
+    }
+  }
+
+  static OrderStatus fromString(String string) {
+    switch (string) {
+      case "listed":
+        return OrderStatus.listed;
+      case "pending":
+        return OrderStatus.pending;
+      case "completed":
+        return OrderStatus.completed;
+      case "expired":
+        return OrderStatus.expired;
+      default:
+        return OrderStatus.listed;
     }
   }
 }

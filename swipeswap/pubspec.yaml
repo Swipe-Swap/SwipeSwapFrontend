@@ -29,7 +29,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_text_kit: ^4.2.2
+  cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.2
+  dot_navigation_bar: ^1.0.2
   firebase_auth: ^4.9.0
   firebase_core: ^2.15.1
   flutter:
@@ -38,6 +40,7 @@ dependencies:
   google_sign_in: ^6.1.5
   map_location_picker: ^1.2.6
   provider: ^6.0.5
+  validatorless: ^1.2.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0
