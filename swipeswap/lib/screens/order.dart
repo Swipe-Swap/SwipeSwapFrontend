@@ -6,7 +6,6 @@ import 'package:swipeswap/models/user.dart';
 import 'package:swipeswap/provider/order_provider.dart';
 import 'package:swipeswap/provider/user_provider.dart';
 import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/widgets/custom_nav_bar.dart';
 import 'package:map_location_picker/map_location_picker.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:validatorless/validatorless.dart';
@@ -31,7 +30,6 @@ class _OrderState extends State<Order> {
     String _deliveryLocation = '';
     List<bool> _delivery = [true, false];
     return Scaffold(
-      appBar: const CustomNavBar(),
       body: Form(
         key: _formKey,
         child: Column(
