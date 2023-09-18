@@ -16,3 +16,4 @@
 
 - [] EULA
 - [] Marketing? Is it to best to grow fast or slow? Is it better for the university to know about it sooner or later? I think sooner
+- [] Talk with Purdue? It might be better to discuss and try to see the university's side and come to some sort of an agreement BEFORE publishing
