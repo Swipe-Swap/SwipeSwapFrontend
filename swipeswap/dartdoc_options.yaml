@@ -1,0 +1,8 @@
+dartdoc:
+  # categories:
+  #   "Screens":
+  #     markdown: doc/Screens.md
+  #     name: Screens
+  exclude: ["lib/src/**"]
+  nodoc: ["lib/src/**"]
+  # categoryOrder: ["Screens"]

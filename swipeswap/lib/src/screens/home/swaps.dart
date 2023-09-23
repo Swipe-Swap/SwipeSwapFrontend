@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:swipeswap/src/provider/screen_provider.dart';
 import 'package:swipeswap/src/utils/bottom_nav_bar.dart';
 import 'package:swipeswap/src/utils/constants.dart';
-import 'package:swipeswap/widgets/dining_court.dart';
+import 'package:swipeswap/src/widgets/dining_court.dart';
 
 /// Main application page
 class Swaps extends StatefulWidget {

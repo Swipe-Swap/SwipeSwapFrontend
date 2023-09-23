@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swipeswap/src/services/firebase_options.dart';
-import 'package:swipeswap/provider/order_provider.dart';
+import 'package:swipeswap/src/provider/order_provider.dart';
 import 'package:swipeswap/src/provider/screen_provider.dart';
 import 'package:swipeswap/src/provider/user_provider.dart';
 import 'package:swipeswap/src/screens/home/seller.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:swipeswap/provider/order_provider.dart';
+import 'package:swipeswap/src/provider/order_provider.dart';
 import 'package:swipeswap/src/screens/order/order.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 

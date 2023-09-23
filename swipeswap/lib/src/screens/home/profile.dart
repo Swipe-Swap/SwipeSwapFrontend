@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swipeswap/widgets/logout_button.dart';
+import 'package:swipeswap/src/widgets/logout_button.dart';
 
 /// User profile page
 /// Users have:

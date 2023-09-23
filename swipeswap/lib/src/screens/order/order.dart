@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/src/models/order_model.dart';
-import 'package:swipeswap/provider/order_provider.dart';
+import 'package:swipeswap/src/provider/order_provider.dart';
 import 'package:swipeswap/src/screens/matching/matching.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 import 'package:validatorless/validatorless.dart';
