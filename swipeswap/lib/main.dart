@@ -3,19 +3,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:swipeswap/firebase_options.dart';
+import 'package:swipeswap/src/services/firebase_options.dart';
 import 'package:swipeswap/provider/order_provider.dart';
-import 'package:swipeswap/provider/user_provider.dart';
-import 'package:swipeswap/screens/exchange.dart';
-import 'package:swipeswap/screens/listing.dart';
+import 'package:swipeswap/src/provider/screen_provider.dart';
+import 'package:swipeswap/src/provider/user_provider.dart';
+import 'package:swipeswap/src/screens/home/seller.dart';
 
 // Package imports
-import 'package:swipeswap/screens/order.dart';
-import 'package:swipeswap/screens/swaps.dart';
-import 'package:swipeswap/screens/profile.dart';
-import 'package:swipeswap/screens/welcome.dart';
-import 'package:swipeswap/utils/constants.dart';
-import 'package:swipeswap/screens/wrapper.dart';
+import 'package:swipeswap/src/screens/order/order.dart';
+import 'package:swipeswap/src/screens/home/swaps.dart';
+import 'package:swipeswap/src/screens/home/profile.dart';
+import 'package:swipeswap/src/screens/welcome/welcome.dart';
+import 'package:swipeswap/src/utils/constants.dart';
+import 'package:swipeswap/src/screens/welcome/wrapper.dart';
 
 // Third-party dependency imports
 import 'package:provider/provider.dart';
@@ -39,6 +39,8 @@ void main() async {
         ChangeNotifierProvider<OrderProvider>(
             create: (context) => OrderProvider()),
         // ChangeNotifierProvider<ListingProvider>(create: create),
+        ChangeNotifierProvider<ScreenProvider>(
+            create: (context) => ScreenProvider()),
       ],
       child: const SwipeSwap(),
     ),
@@ -72,13 +74,11 @@ class SwipeSwap extends StatelessWidget {
         ),
         home: const Wrapper(),
         routes: {
-          // TODO: implement provider for variable routes
           Routes.welcome.toString(): (context) => const Welcome(),
           Routes.swaps.toString(): (context) => const Swaps(),
           Routes.user.toString(): (context) => const Profile(),
           Routes.order.toString(): (context) => const Order(),
-          Routes.listing.toString(): (context) => const Listing(),
-          Routes.exchange.toString(): (context) => const Exchange(),
+          Routes.seller.toString(): (context) => const Seller(),
         },
       );
     });
