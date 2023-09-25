@@ -46,3 +46,4 @@ app.*.map.json
 # Env file
 *.env
 *.keystore
+**/firebase_options.dart

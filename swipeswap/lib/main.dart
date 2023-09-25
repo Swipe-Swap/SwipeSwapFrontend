@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:swipeswap/src/services/firebase_options.dart';
+import 'package:swipeswap/firebase_options.dart';
 import 'package:swipeswap/src/provider/order_provider.dart';
 import 'package:swipeswap/src/provider/screen_provider.dart';
 import 'package:swipeswap/src/provider/user_provider.dart';

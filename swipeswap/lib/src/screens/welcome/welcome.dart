@@ -3,9 +3,7 @@ import 'package:swipeswap/src/utils/constants.dart';
 
 import 'package:flutter/material.dart';
 
-/// "By the students, for the students"
-/// "Savor the flavor, fund the future"
-/// "Start swapping!"
+/// Two pages that eventually take the user to a login page
 class Welcome extends StatefulWidget {
   final int currentPage;
   const Welcome({super.key, this.currentPage = 0});
@@ -159,14 +157,14 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
         Image.asset("assets/images/logo.png"),
         SizedBox(height: height * 0.065),
         Text(
-          'How It Works',
+          'Swipe Smart!',
           style: TextStyle(
             fontSize: width * 0.08,
           ),
         ),
         SizedBox(height: height * 0.06),
         Text(
-          'Sell your extra meal swipes to other students or buy cheaper dining court meals.',
+          'Sell your extra swipes to other students or buy cheaper dining court meals!',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: width * 0.055),
         ),

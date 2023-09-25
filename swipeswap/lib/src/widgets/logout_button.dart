@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:swipeswap/src/services/auth.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 
-/// Logout button
+/// A button for logging out; uses [AuthService] to expire the users credentials
+/// Currently redirects the user to the welcome page
 class LogoutButton extends StatefulWidget {
   const LogoutButton({super.key});
 

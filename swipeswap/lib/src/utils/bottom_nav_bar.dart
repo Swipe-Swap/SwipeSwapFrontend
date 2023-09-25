@@ -7,7 +7,11 @@ import 'package:swipeswap/src/provider/screen_provider.dart';
 import 'package:swipeswap/src/screens/home/swaps.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 
-/// A custom bottom nav bar
+/// A custom bottom nav bar with three pages:
+/// [Swaps]
+/// [Seller]
+/// [Profile]
+///
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 

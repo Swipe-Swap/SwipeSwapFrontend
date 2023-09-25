@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:swipeswap/providers.dart';
 import 'package:swipeswap/src/models/user_model.dart';
 import 'package:swipeswap/src/utils/constants.dart';
-import 'package:swipeswap/widgets/dining_court.dart';
+import 'package:swipeswap/widgets.dart';
+import 'package:swipeswap/src/widgets/dining_court.dart';
 
 /// Order card contains information about the order
 /// Displayed on the Negotiation screen
 class OrderCard extends StatefulWidget {
-  DiningCourt diningCourt;
-  OrderCard({super.key, required this.diningCourt});
+  const OrderCard({super.key});
 
   @override
   State<OrderCard> createState() => _OrderCardState();
@@ -23,8 +25,8 @@ class _OrderCardState extends State<OrderCard> {
         Row(
           children: [
             DiningCourtWidget(
-              assetPath: Asset.fromDiningCourt(widget.diningCourt),
-              assetText: widget.diningCourt.toString(),
+              assetPath: Asset.fromDiningCourt(Provider.of<OrderProvider>(context).diningCourt!),
+              assetText: Provider.of<OrderProvider>(context).diningCourt.toString(),
             ),
             Column(
               children: [

@@ -1,7 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+/// A class for handling authentication and managing the user auth state
+/// Currently only supports google authentication
+/// May support email and password validation at some point in the future
 class AuthService {
+  /// Uses the [HTTP](package:google_sign_in/google_sign_in.dart) package to
+  /// authenticate using Google credentials
+  /// Signs the user into the Firebase backend so data can be updated
   Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow

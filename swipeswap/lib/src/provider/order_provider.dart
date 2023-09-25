@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:swipeswap/models/user_model.dart';
-import 'package:swipeswap/utils/constants.dart';
+import 'package:swipeswap/src/models/user_model.dart';
+import 'package:swipeswap/src/utils/constants.dart';
 
 /// A provider for updating and managing buyer information
 ///

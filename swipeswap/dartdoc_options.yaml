@@ -3,6 +3,6 @@ dartdoc:
   #   "Screens":
   #     markdown: doc/Screens.md
   #     name: Screens
-  exclude: ["lib/src/**"]
-  nodoc: ["lib/src/**"]
+  exclude: ["lib/src/**", "lib/firebase_options.dart"]
+  nodoc: ["lib/src/**", "lib/firebase_options.dart"]
   # categoryOrder: ["Screens"]

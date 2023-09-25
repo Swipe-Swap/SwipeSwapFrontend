@@ -5,11 +5,15 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:swipeswap/src/screens/home/profile.dart';
 import 'package:swipeswap/src/screens/home/seller.dart';
 import 'package:swipeswap/src/screens/home/swaps.dart';
-// import 'package:swipeswap/screens/seller.dart';
 
+/// Firebase db instance that can be imported
 final db = FirebaseFirestore.instance;
+
+/// Formatter for working with currency
 final CurrencyTextInputFormatter formatter =
     CurrencyTextInputFormatter(symbol: '');
+
+/// Tabs for the custom bottom nav bar
 final tabs = [swapsGrid(), const Seller(), const Profile()];
 
 /// Enum containing routes
@@ -51,6 +55,11 @@ enum Routes {
   }
 }
 
+/// Enum for the status of an order:
+/// Listed: the order has been created and the buyer is waiting for a seller to accept
+/// Pending: the order has been accepted but not yet fulfilled
+/// Completed: the order has been fulfilled
+/// Expired: the order has expired without being fulfilled
 enum OrderStatus {
   listed,
   pending,
@@ -88,6 +97,7 @@ enum OrderStatus {
   }
 }
 
+/// An enum of the 5 Purdue dining courts
 enum DiningCourt {
   earhart,
   hillenbrand,
@@ -132,6 +142,7 @@ enum DiningCourt {
   }
 }
 
+/// An enum for retrieving the assets of the dining courts
 enum Asset {
   earhart,
   ford,
