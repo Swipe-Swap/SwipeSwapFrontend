@@ -1,6 +1,9 @@
+import 'dart:js_interop';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:swipeswap/src/models/seller_model.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 import 'package:swipeswap/src/utils/order_card.dart';
 
@@ -23,6 +26,7 @@ class MatchFound extends StatefulWidget {
 
 class _MatchFoundState extends State<MatchFound> {
   late final queueMatch;
+  late final SellerModel seller;
   late dynamic documentReference;
   late final Stream<QuerySnapshot> documentStream;
   late bool accept;
@@ -48,6 +52,8 @@ class _MatchFoundState extends State<MatchFound> {
                 snapshot.data!.docs[i]["listingId"]) {
               print(snapshot.data);
               queueMatch = snapshot.data;
+              // TODO: convert to seller object?
+              seller = SellerModel.fromJson(snapshot.data.jsify())
             } else {
               print(
                   'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
@@ -73,8 +79,13 @@ class _MatchFoundState extends State<MatchFound> {
                       ),
                     ),
                     SizedBox(height: 5.h),
+                    // TODO: get user data
                     OrderCard(
                       diningCourt: widget.diningCourt,
+                      price: seller.basePrice,
+                      // TODO: get seller id by requesting firebase backend using sellerID
+                      sellerName: seller.sellerId,
+                      sellerId: null,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10.sp),
