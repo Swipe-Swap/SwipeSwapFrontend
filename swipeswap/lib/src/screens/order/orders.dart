@@ -10,6 +10,8 @@ List<OrderModel> completedOrders = [];
 List<OrderModel> expiredOrders = [];
 
 /// Show user's listed, pending, completed, and expired orders
+/// TODO: add a way to access this regardless, Soham will write redirection wrapper in
+/// the case of a currently accepted order
 class Orders extends StatefulWidget {
   const Orders({super.key});
 
