@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swipeswap/firebase_options.dart';
+import 'package:swipeswap/libraries/widgets.dart';
 import 'package:swipeswap/src/provider/order_provider.dart';
 import 'package:swipeswap/src/provider/screen_provider.dart';
 import 'package:swipeswap/src/provider/user_provider.dart';
@@ -72,6 +73,17 @@ class SwipeSwap extends StatelessWidget {
           iconTheme: const IconThemeData(color: kPrimaryColor1),
           useMaterial3: true,
         ),
+        // Define custom exception page
+        builder: (BuildContext context, Widget? widget) {
+          // A custom error widget
+          ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+            // Should show a user-friendly error message
+            throw Exception(errorDetails);
+          };
+
+          // Redirect to given widget or let the wrapper handle redirection
+          return widget ?? const Wrapper();
+        },
         home: const Wrapper(),
         routes: {
           Routes.welcome.toString(): (context) => const Welcome(),

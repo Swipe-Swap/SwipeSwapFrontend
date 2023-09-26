@@ -33,7 +33,7 @@ class _MatchFoundState extends State<MatchFound> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance.collection('queuedJobs').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -47,13 +47,14 @@ class _MatchFoundState extends State<MatchFound> {
           if (!snapshot.hasData) {
             return const Text('Document does not exist');
           }
+          // TODO: this logic needs to be coordinated w/ backend
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             if (widget.docID.toString() ==
                 snapshot.data!.docs[i]["listingId"]) {
               print(snapshot.data);
               queueMatch = snapshot.data;
               // TODO: convert to seller object?
-              seller = SellerModel.fromJson(snapshot.data.jsify())
+              seller = SellerModel.fromJson(snapshot.data.jsify());
             } else {
               print(
                   'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');

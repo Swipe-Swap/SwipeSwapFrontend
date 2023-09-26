@@ -8,3 +8,6 @@ export '../src/widgets/item.dart';
 
 /// Custom logout button
 export '../src/widgets/logout_button.dart';
+
+/// Custom exception
+// export '../src/widgets/error.dart';

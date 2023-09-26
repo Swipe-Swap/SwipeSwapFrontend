@@ -14,39 +14,55 @@ class Matching extends StatefulWidget {
 class _MatchingState extends State<Matching> {
   late final SellerModel queueMatch;
   late dynamic documentReference;
-  late final Stream<QuerySnapshot> documentStream;
+  late final Stream<QuerySnapshot<Map<String, dynamic>>> documentStream;
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('queuedJobs').snapshots(),
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+
+        /// Retrieve queuedJobs sorted by queueNum ascending for the current order
+        stream: FirebaseFirestore.instance
+            .collection('queuedJobs')
+            .where('orderId' == widget.docID)
+            .orderBy("queueNum", descending: false)
+            .snapshots(),
+        // NOTE: firebase cloud messaging will handle notifying sellers
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text('Loading...');
+            return const CircularProgressIndicator();
           }
 
           if (!snapshot.hasData) {
             return const Text('Document does not exist');
           }
-          // TODO: don't know what to do
-          // There's multiple matches; how do we want to push them?
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            if (widget.docID.toString() ==
-                snapshot.data!.docs[i]["listingId"]) {
+          else {
+            snapshot.data!.docs.forEach((doc) { 
+              // 
               // Take the listing data
-              queueMatch = SellerModel.fromJson(snapshot.data!.data());
+              queueMatch = SellerModel.fromJson(snapshot.data!.);
               // Convert the listing data to the format
               Navigator.pushNamed(context, "/matchFound",
                   arguments: queueMatch);
-            } else {
-              print(
-                  'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
-            }
-          }
+            });
+            // TODO: reworking the below code above
+          //   for (int i = 0; i < snapshot.data!.docs.length; i++) {
+          //     if (widget.docID.toString() ==
+          //         snapshot.data!.docs[i]["listingId"]) {
+          //       // Take the listing data
+          //       queueMatch = SellerModel.fromJson(snapshot.data!.);
+          //       // Convert the listing data to the format
+          //       Navigator.pushNamed(context, "/matchFound",
+          //           arguments: queueMatch);
+          //     } else {
+          //       print(
+          //           'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
+          //     }
+          //   }
+          // }
 
           return Scaffold(
             appBar: AppBar(automaticallyImplyLeading: false),
