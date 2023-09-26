@@ -4,7 +4,7 @@
 
 - [] NOTHING NEW PAST THIS POINT UNTIL EVERYTHING IS IMPLEMENTED
 - [] Get documentation to generate
-- [] Push notifications to matched listers
+- [] Push notifications to matched listers (we're gonna need notifications)
 - [] Updated login page (includes email + password) or maybe sign in with Purdue if we can discuss the app w/ the university and come to some sort of agreement
 - [] User profile
 - [] Accepted seller screen for buyer

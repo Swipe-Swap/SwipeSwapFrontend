@@ -38,31 +38,30 @@ class _MatchingState extends State<Matching> {
 
           if (!snapshot.hasData) {
             return const Text('Document does not exist');
-          }
-          else {
-            snapshot.data!.docs.forEach((doc) { 
-              // 
+          } else {
+            snapshot.data!.docs.forEach((doc) {
+              //
               // Take the listing data
-              queueMatch = SellerModel.fromJson(snapshot.data!.);
+              queueMatch = SellerModel.fromJson(doc.data());
               // Convert the listing data to the format
               Navigator.pushNamed(context, "/matchFound",
                   arguments: queueMatch);
             });
             // TODO: reworking the below code above
-          //   for (int i = 0; i < snapshot.data!.docs.length; i++) {
-          //     if (widget.docID.toString() ==
-          //         snapshot.data!.docs[i]["listingId"]) {
-          //       // Take the listing data
-          //       queueMatch = SellerModel.fromJson(snapshot.data!.);
-          //       // Convert the listing data to the format
-          //       Navigator.pushNamed(context, "/matchFound",
-          //           arguments: queueMatch);
-          //     } else {
-          //       print(
-          //           'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
-          //     }
-          //   }
-          // }
+            //   for (int i = 0; i < snapshot.data!.docs.length; i++) {
+            //     if (widget.docID.toString() ==
+            //         snapshot.data!.docs[i]["listingId"]) {
+            //       // Take the listing data
+            //       queueMatch = SellerModel.fromJson(snapshot.data!.);
+            //       // Convert the listing data to the format
+            //       Navigator.pushNamed(context, "/matchFound",
+            //           arguments: queueMatch);
+            //     } else {
+            //       print(
+            //           'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
+            //     }
+            //   }
+          }
 
           return Scaffold(
             appBar: AppBar(automaticallyImplyLeading: false),
