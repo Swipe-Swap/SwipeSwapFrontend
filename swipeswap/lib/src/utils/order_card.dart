@@ -19,6 +19,7 @@ class OrderCard extends StatefulWidget {
     required this.price,
     required this.sellerName,
     required this.sellerId,
+    required DiningCourt diningCourt,
   });
 
   @override

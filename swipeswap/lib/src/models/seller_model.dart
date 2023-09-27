@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:swipeswap/libraries/models.dart';
+
 /// A model for seller preferences; uses the ```sellers``` Firebase collection
 ///
 /// @param double basePrice The base
@@ -18,6 +21,25 @@ class SellerModel {
   int milePrice;
   int rangeMiles;
   String? sellerId;
+  Map<String, dynamic>? userInstance;
+
+  /// Retrieve user
+  Future<UserModel?> getUser(String? sellerId) async {
+    if (sellerId == null) {
+      return null;
+    }
+
+    DocumentSnapshot sellerDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(sellerId)
+        .get();
+
+    if (sellerDoc.exists) {
+      return UserModel.fromJson(sellerDoc.data() as Map<String, dynamic>);
+    } else {
+      return null;
+    }
+  }
 
   SellerModel({
     this.basePrice = 10,

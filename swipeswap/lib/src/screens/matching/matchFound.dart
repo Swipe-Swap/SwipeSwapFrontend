@@ -3,6 +3,7 @@ import 'dart:js_interop';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:swipeswap/libraries/models.dart';
 import 'package:swipeswap/src/models/seller_model.dart';
 import 'package:swipeswap/src/utils/constants.dart';
 import 'package:swipeswap/src/utils/order_card.dart';
@@ -27,6 +28,7 @@ class MatchFound extends StatefulWidget {
 class _MatchFoundState extends State<MatchFound> {
   late final queueMatch;
   late final SellerModel seller;
+  late final UserModel? user;
   late dynamic documentReference;
   late final Stream<QuerySnapshot> documentStream;
   late bool accept;
@@ -48,18 +50,26 @@ class _MatchFoundState extends State<MatchFound> {
             return const Text('Document does not exist');
           }
           // TODO: this logic needs to be coordinated w/ backend
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            if (widget.docID.toString() ==
-                snapshot.data!.docs[i]["listingId"]) {
-              print(snapshot.data);
-              queueMatch = snapshot.data;
-              // TODO: convert to seller object?
-              seller = SellerModel.fromJson(snapshot.data.jsify());
-            } else {
-              print(
-                  'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
-            }
-          }
+          snapshot.data!.docs.forEach((doc) async {
+            //
+            // Take the listing data
+            seller = SellerModel.fromJson(doc.data());
+            user = await seller.getUser(seller.sellerId);
+            // Convert the listing data to the format
+            Navigator.pushNamed(context, "/matchFound", arguments: queueMatch);
+          });
+          // for (int i = 0; i < snapshot.data!.docs.length; i++) {
+          //   if (widget.docID.toString() ==
+          //       snapshot.data!.docs[i]["listingId"]) {
+          //     print(snapshot.data);
+          //     queueMatch = snapshot.data;
+          //     // TODO: convert to seller object?
+          //     seller = SellerModel.fromJson(snapshot.data.jsify());
+          //   } else {
+          //     print(
+          //         'no eligible seller found in queue. ${snapshot.data!.docs[i]["listingId"]}, ${widget.docID}');
+          //   }
+          // }
 
           return Scaffold(
             appBar: AppBar(automaticallyImplyLeading: false),
@@ -83,10 +93,10 @@ class _MatchFoundState extends State<MatchFound> {
                     // TODO: get user data
                     OrderCard(
                       diningCourt: widget.diningCourt,
-                      price: seller.basePrice,
-                      // TODO: get seller id by requesting firebase backend using sellerID
-                      sellerName: seller.sellerId,
-                      sellerId: null,
+                      price: seller.basePrice.toString(),
+                      // Get seller id by requesting firebase backend using sellerID
+                      sellerName: user?.fullName ?? '',
+                      sellerId: int.tryParse(seller.sellerId ?? '') ?? 0,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10.sp),
