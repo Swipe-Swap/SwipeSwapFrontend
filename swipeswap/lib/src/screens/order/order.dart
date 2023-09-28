@@ -3,6 +3,8 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:swipeswap/src/models/order_model.dart';
@@ -225,58 +227,58 @@ class _OrderState extends State<Order> {
                       ],
                     ),
                   ),
-                  // Location
+                  // TEMPLATE CODE: Location
+                  // (delivery)
+                  //     ? Align(
+                  //         alignment: Alignment.centerLeft,
+                  //         child: Padding(
+                  //           padding: EdgeInsets.fromLTRB(15.sp, 5.sp, 0, 5.sp),
+                  //           child: Text(
+                  //             "Delivery Location",
+                  //             style: TextStyle(
+                  //                 fontWeight: FontWeight.bold, fontSize: 15.sp),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : const SizedBox(),
                   (delivery)
-                      ? Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15.sp, 5.sp, 0, 5.sp),
-                            child: Text(
-                              "Delivery Location",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15.sp),
-                            ),
+                      // MAPS CODE
+                      ? SizedBox(
+                          height: 500,
+                          width: 500,
+                          child: MapLocationPicker(
+                            apiKey: dotenv.env['API_KEY']!,
+                            onNext: (GeocodingResult? result) {
+                              if (result != null) {
+                                deliveryLocation =
+                                    result.formattedAddress ?? "";
+                              }
+                            },
                           ),
                         )
                       : const SizedBox(),
-                  (delivery)
-                      // MAPS CODE (implement later)
-                      // ? SizedBox(
-                      //     height: 500,
-                      //     width: 500,
-                      //     child: MapLocationPicker(
-                      //       apiKey: dotenv.env['API_KEY']!,
-                      //       onNext: (GeocodingResult? result) {
-                      //         if (result != null) {
-                      //           deliveryLocation =
-                      //               result.formattedAddress ?? "";
-                      //         }
-                      //       },
-                      //     ),
-                      //   )
-                      // : const SizedBox(),
-                      ? Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15.sp, 0.sp, 0, 0.sp),
-                            child: SizedBox(
-                              height: 8.h,
-                              width: 60.w,
-                              child: TextFormField(
-                                // temporarily readonly
-                                readOnly: true,
-                                initialValue:
-                                    "Ex: 355 N Martin Jischke Dr, West Lafayette, IN 47906",
-                                decoration: const InputDecoration(
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
+                  // ? Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Padding(
+                  //       padding: EdgeInsets.fromLTRB(15.sp, 0.sp, 0, 0.sp),
+                  //       child: SizedBox(
+                  //         height: 8.h,
+                  //         width: 60.w,
+                  //         child: TextFormField(
+                  //           // temporarily readonly
+                  //           readOnly: true,
+                  //           initialValue:
+                  //               "Ex: 355 N Martin Jischke Dr, West Lafayette, IN 47906",
+                  //           decoration: const InputDecoration(
+                  //             hintStyle: TextStyle(
+                  //               color: Colors.white,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   )
+                  // : const SizedBox(),
 
                   // Delivery instructions
                   (delivery)

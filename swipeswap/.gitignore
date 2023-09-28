@@ -43,7 +43,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Env file
+# Protected files
 *.env
 *.keystore
 **/firebase_options.dart
+**/AndroidManifest.xml
