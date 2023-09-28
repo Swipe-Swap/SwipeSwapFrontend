@@ -47,4 +47,4 @@ app.*.map.json
 *.env
 *.keystore
 **/firebase_options.dart
-**/AndroidManifest.xml
+/android/app/src/main/AndroidManifest.xml
