@@ -3,7 +3,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:map_location_picker/map_location_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -247,7 +247,7 @@ class _OrderState extends State<Order> {
                           height: 500,
                           width: 500,
                           child: MapLocationPicker(
-                            apiKey: dotenv.env['API_KEY']!,
+                            apiKey: FlutterConfig.get('API_KEY'),
                             onNext: (GeocodingResult? result) {
                               if (result != null) {
                                 deliveryLocation =

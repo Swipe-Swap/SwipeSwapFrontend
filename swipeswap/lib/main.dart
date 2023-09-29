@@ -20,12 +20,12 @@ import 'package:swipeswap/src/screens/welcome/wrapper.dart';
 
 // Third-party dependency imports
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterConfig.loadEnvVariables();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
