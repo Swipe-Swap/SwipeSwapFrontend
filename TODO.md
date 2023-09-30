@@ -2,17 +2,20 @@
 
 ## APP
 
-- [] NOTHING NEW PAST THIS POINT UNTIL EVERYTHING IS IMPLEMENTED
-- [] Get documentation to generate
-- [] Push notifications to matched listers (we're gonna need notifications)
+- [x] Get documentation to generate
+- [] X: Push notifications to matched listers (we're gonna need notifications)
+- [] S: User profile
+- [] S: Accepted seller screen for buyer
+- [] X: Google maps functionality
+- [] X: Buyer payment screen (method of payment?)
+- [] S: Matching algorithm and implementation
+- [] S: Orders.dart (wrapper + button to access later)
+- [] TOGETHER: test and debug
+
+## FUTURE UPDATES (maybe)
 - [] Updated login page (includes email + password) or maybe sign in with Purdue if we can discuss the app w/ the university and come to some sort of agreement
-- [] User profile
-- [] Accepted seller screen for buyer
-- [] Google maps functionality
-- [] Buyer payment screen (method of payment?)
-- [] Post payment screen/order tracking/order information
+- [] Automated conflict resolution system
 - [] Messaging?
-- [] Clarify & Simplify! Make it EASY TO UNDERSTAND
 - [] IOS version
 - [] Testing?
 
