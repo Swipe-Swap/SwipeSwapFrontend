@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:swipeswap/firebase_options.dart';
 
 /// A class for handling authentication and managing the user auth state
 /// Currently only supports google authentication

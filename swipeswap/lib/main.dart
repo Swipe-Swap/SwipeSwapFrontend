@@ -1,5 +1,7 @@
 // Flutter imports
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +24,21 @@ import 'package:swipeswap/src/screens/welcome/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:sizer/sizer.dart';
+import 'package:rxdart/rxdart.dart';
+
+// TODO: figure out handling interaction (https://firebase.flutter.dev/docs/messaging/notifications/#handling-interaction)
+
+// Define the background message handler
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+    print('Message data: ${message.data}');
+    print('Message notification: ${message.notification?.title}');
+    print('Message notification: ${message.notification?.body}');
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +46,65 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Request permission
+
+  final messaging = FirebaseMessaging.instance;
+  final settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  // It requests a registration token for sending messages to users from your App server or other trusted server environment.
+  // TODO: the below is REALLY BAD PRACTICE; need to fix this
+  String? token = await messaging.getToken();
+
+  // Register with FCM
+  var vapidKey = FlutterConfig.get("VAPID_KEY");
+
+  // use the registration token to send messages to users from your trusted server environment
+  if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
+    token = await messaging.getToken(
+      vapidKey: vapidKey,
+    );
+  } else {
+    token = await messaging.getToken();
+  }
+
+  if (kDebugMode) {
+    print('Registration Token=$token');
+  }
+
+  // Set up foreground message handler
+  // used to pass messages from event handler to the UI
+  final _messageStreamController = BehaviorSubject<RemoteMessage>();
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (kDebugMode) {
+      print('Handling a foreground message: ${message.messageId}');
+      print('Message data: ${message.data}');
+      print('Message notification: ${message.notification?.title}');
+      print('Message notification: ${message.notification?.body}');
+    }
+
+    _messageStreamController.sink.add(message);
+  });
+
+  // Set up background message handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  if (kDebugMode) {
+    print('Permission granted: ${settings.authorizationStatus}');
+  }
+
   runApp(
     MultiProvider(
       providers: [
