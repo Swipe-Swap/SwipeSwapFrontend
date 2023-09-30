@@ -15,17 +15,20 @@ class UserModel {
   String? uuid;
   String email;
   String phoneNumber;
+  String? photoUrl;
   // int? sellerRating;
 
-  UserModel({
-    required this.currentLocation,
-    required this.fullName,
-    required this.email,
-    this.uuid,
-    this.date,
-    required this.phoneNumber,
-    // this.sellerRating,
-  }) : dateCreated = date ?? DateTime.now();
+  UserModel(
+      {required this.currentLocation,
+      required this.fullName,
+      required this.email,
+      this.uuid,
+      this.date,
+      required this.phoneNumber,
+      required this.photoUrl
+      // this.sellerRating,
+      })
+      : dateCreated = date ?? DateTime.now();
 
   factory UserModel.fromJson(Map<String, dynamic> responseData) {
     return UserModel(
@@ -34,6 +37,7 @@ class UserModel {
       email: responseData['email'],
       uuid: responseData['uuid'],
       phoneNumber: responseData['phoneNumber'],
+      photoUrl: responseData['photoUrl'],
       // sellerRating: responseData["sellerRating"],
     );
   }
@@ -45,6 +49,7 @@ class UserModel {
       "email": user.email,
       "userId": user.uuid,
       "phoneNumber": user.phoneNumber,
+      "photoUrl": user.photoUrl
       // "sellerRating": user.sellerRating,
     };
   }
