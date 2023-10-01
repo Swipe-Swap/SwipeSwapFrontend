@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -21,26 +22,46 @@ class _WrapperState extends State<Wrapper> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      user = FirebaseAuth.instance.authStateChanges().listen((user) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      user = FirebaseAuth.instance.authStateChanges().listen((user) async {
         if (user == null) {
           debugPrint('User is currently signed out!');
         } else {
           // TODO: partly mock data
           // TODO: come back to
-          final firebaseUser = UserModel(
-            photoUrl: user.photoURL,
-            email: user.email.toString(),
-            uuid: user.uid.toString(),
-            currentLocation: "0, 0",
-            // sellerRating: null,
-            fullName: user.displayName.toString(),
-            date: null,
-            phoneNumber: user.phoneNumber.toString(),
-          );
-          // Provider.of<UserProvider>(context).setUser(firebaseUser);
-          // final name = Provider.of<UserProvider>(context).user!.fullName;
-          // debugPrint("Username " + name);
+          final CollectionReference userRef =
+              FirebaseFirestore.instance.collection('/users');
+          var userDoc = await userRef.doc(user.uid).get();
+          var firebaseUser;
+          if (userDoc.exists) {
+            firebaseUser = UserModel(
+              photoUrl: user.photoURL,
+              email: user.email.toString(),
+              uuid: user.uid.toString(),
+              currentLocation: "0, 0",
+              // sellerRating: null,
+              fullName: user.displayName.toString(),
+              date: null,
+              phoneNumber: user.phoneNumber.toString(),
+            );
+          } else {
+            debugPrint('Document, does not exist, creating user document...');
+
+            firebaseUser = UserModel(
+              photoUrl: user.photoURL,
+              email: user.email.toString(),
+              uuid: user.uid.toString(),
+              currentLocation: "0, 0",
+              // sellerRating: null,
+              fullName: user.displayName.toString(),
+              date: null,
+              phoneNumber: user.phoneNumber.toString(),
+            );
+            await userRef.doc(user.uid).set(UserModel.toJson(firebaseUser));
+            debugPrint("Created User Document in Firestore!");
+          }
+          Provider.of<UserProvider>(context, listen: false)
+              .setUser(firebaseUser);
           debugPrint('User is signed in!');
         }
       });
