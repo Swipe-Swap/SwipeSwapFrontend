@@ -48,5 +48,6 @@ app.*.map.json
 *.keystore
 **/firebase_options.dart
 /web/firebase-messaging-sw.js
-service-account.json
-/server/
+**service-account.json
+/server/**
+/server/src/main/resources/service-account.json
