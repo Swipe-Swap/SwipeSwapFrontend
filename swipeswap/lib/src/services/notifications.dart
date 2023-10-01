@@ -1,6 +1,8 @@
 /// A file for handling push notifications
-/// My goal is to understand https://firebase.google.com/codelabs/firebase-fcm-flutter#3
-/// so I can listen to and emit notifications, and then this code can just be 
-/// run when necessary
-/// TODO: implement firebase message handler
-/// I thought I would have to implement stuff for flutter, but it might just be the generic listener... 
+/// NOTIFICATIONS: 
+/// Seller is notified when they are matched with a buyer
+/// Buyer is notified when a seller accepts their order
+/// Seller is notified when a buyer confirms or denies their request; post 30 second
+
+/// TODO: Subscribe to Firebase backend for listening to notifications using users 
+/// messaging token

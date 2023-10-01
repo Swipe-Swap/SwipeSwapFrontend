@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:swipeswap/src/screens/home/profile.dart';
 import 'package:swipeswap/src/screens/home/seller.dart';
 import 'package:swipeswap/src/screens/home/swaps.dart';
 
 /// Firebase db instance that can be imported
 final db = FirebaseFirestore.instance;
+final messaging = FirebaseMessaging.instance;
 
 /// Formatter for working with currency
 final CurrencyTextInputFormatter formatter =

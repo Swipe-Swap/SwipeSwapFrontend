@@ -46,7 +46,7 @@ class OrderModel {
       isDelivery: responseData['isDelivery'],
       orderDetails: responseData['orderDetails'],
       orderStatus: OrderStatus.fromString(responseData['orderStatus']),
-      buyerId: responseData['buyerId'],
+      buyerId: responseData['buyerUId'],
       sellerId: responseData['sellerId'],
       timeListed: responseData['timeListed'],
       maxPrice: responseData['maxPrice'],

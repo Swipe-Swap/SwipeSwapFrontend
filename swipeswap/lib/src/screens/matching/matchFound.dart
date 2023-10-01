@@ -54,7 +54,7 @@ class _MatchFoundState extends State<MatchFound> {
             //
             // Take the listing data
             seller = SellerModel.fromJson(doc.data());
-            user = await seller.getUser(seller.sellerId);
+            user = await seller.getUser(seller.sellerPrefId);
             // Convert the listing data to the format
             Navigator.pushNamed(context, "/matchFound", arguments: queueMatch);
           });
@@ -96,7 +96,7 @@ class _MatchFoundState extends State<MatchFound> {
                       price: seller.basePrice.toString(),
                       // Get seller id by requesting firebase backend using sellerID
                       sellerName: user?.fullName ?? '',
-                      sellerId: int.tryParse(seller.sellerId ?? '') ?? 0,
+                      sellerId: int.tryParse(seller.sellerPrefId ?? '') ?? 0,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10.sp),

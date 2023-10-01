@@ -52,8 +52,6 @@ void main() async {
   );
 
   // Request permission
-
-  final messaging = FirebaseMessaging.instance;
   final settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -65,24 +63,6 @@ void main() async {
   );
 
   // It requests a registration token for sending messages to users from your App server or other trusted server environment.
-  // TODO: the below is REALLY BAD PRACTICE; need to fix this
-  String? token = await messaging.getToken();
-
-  // Register with FCM
-  var vapidKey = FlutterConfig.get("VAPID_KEY");
-
-  // use the registration token to send messages to users from your trusted server environment
-  if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
-    token = await messaging.getToken(
-      vapidKey: vapidKey,
-    );
-  } else {
-    token = await messaging.getToken();
-  }
-
-  if (kDebugMode) {
-    print('Registration Token=$token');
-  }
 
   // Set up foreground message handler
   // used to pass messages from event handler to the UI

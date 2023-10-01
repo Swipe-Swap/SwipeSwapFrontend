@@ -153,7 +153,8 @@ class _SellerState extends State<Seller> {
                                 int.tryParse(_milePriceController.text) ?? 5,
                             rangeMiles:
                                 int.tryParse(_rangeMilesController.text) ?? 1,
-                            sellerId: FirebaseAuth.instance.currentUser?.uid,
+                            sellerPrefId:
+                                FirebaseAuth.instance.currentUser?.uid,
                           ),
                         ),
                       );

@@ -16,11 +16,11 @@ class SellerModel {
   double basePrice;
   bool canDeliver;
   String diningCourt;
-  DateTime? initialTime;
+  DateTime? timeListed;
   DateTime? expirationTime;
   int milePrice;
   int rangeMiles;
-  String? sellerId;
+  String? sellerPrefId;
   Map<String, dynamic>? userInstance;
 
   /// Retrieve user
@@ -49,8 +49,8 @@ class SellerModel {
     required this.diningCourt,
     this.milePrice = 5,
     this.rangeMiles = 1,
-    this.sellerId,
-  })  : initialTime = initialTime ?? DateTime.now(),
+    this.sellerPrefId,
+  })  : timeListed = initialTime ?? DateTime.now(),
         expirationTime =
             expirationTime ?? DateTime.now().add(const Duration(hours: 1));
 
@@ -62,21 +62,21 @@ class SellerModel {
       expirationTime: responseData['expirationTime'],
       milePrice: responseData['milePrice'],
       rangeMiles: responseData['rangeMiles'],
-      initialTime: responseData['initialTime'],
-      sellerId: responseData['sellerId'],
+      initialTime: responseData['timeListed'],
+      sellerPrefId: responseData['sellerPrefId'],
     );
   }
 
-  static Map<String, dynamic> toJson(SellerModel listing) {
+  static Map<String, dynamic> toJson(SellerModel sellerPref) {
     return {
-      "basePrice": listing.basePrice,
-      "canDeliver": listing.canDeliver,
-      "diningCourt": listing.diningCourt,
-      "expirationTime": listing.expirationTime,
-      "milePrice": listing.milePrice,
-      "rangeMiles": listing.rangeMiles,
-      "initialTime": listing.initialTime,
-      "sellerId": listing.sellerId,
+      "basePrice": sellerPref.basePrice,
+      "canDeliver": sellerPref.canDeliver,
+      "diningCourt": sellerPref.diningCourt,
+      "expirationTime": sellerPref.expirationTime,
+      "milePrice": sellerPref.milePrice,
+      "rangeMiles": sellerPref.rangeMiles,
+      "initialTime": sellerPref.timeListed,
+      "sellerPrefId": sellerPref.sellerPrefId,
     };
   }
 }
