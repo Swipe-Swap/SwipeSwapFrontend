@@ -20,6 +20,7 @@ class UserModel {
   String? uuid;
   String email;
   String phoneNumber;
+  String? photoUrl;
   String? messagingToken;
   // int? sellerRating;
 
@@ -30,20 +31,22 @@ class UserModel {
     this.uuid,
     this.date,
     required this.phoneNumber,
+    required this.photoUrl,
     this.messagingToken,
     // this.sellerRating,
   }) : dateCreated = date ?? DateTime.now();
 
   factory UserModel.fromJson(Map<String, dynamic> responseData) {
     return UserModel(
-        currentLocation: responseData['currentLocation'],
-        fullName: responseData['fullName'],
-        email: responseData['email'],
-        uuid: responseData['uuid'],
-        phoneNumber: responseData['phoneNumber'],
-        messagingToken: responseData['messagingToken']
-        // sellerRating: responseData["sellerRating"],
-        );
+      currentLocation: responseData['currentLocation'],
+      fullName: responseData['fullName'],
+      email: responseData['email'],
+      uuid: responseData['uuid'],
+      phoneNumber: responseData['phoneNumber'],
+      photoUrl: responseData['photoUrl'],
+      messagingToken: responseData['messagingToken'],
+      // sellerRating: responseData["sellerRating"],
+    );
   }
 
   static Future<Map<String, dynamic>> toJson(UserModel user) async {
@@ -53,6 +56,7 @@ class UserModel {
       "email": user.email,
       "userId": user.uuid,
       "phoneNumber": user.phoneNumber,
+      "photoUrl": user.photoUrl,
       "messagingToken": user.messagingToken ?? await getMessagingToken(),
       // "sellerRating": user.sellerRating,
     };
