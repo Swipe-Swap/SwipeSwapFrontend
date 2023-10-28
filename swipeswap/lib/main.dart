@@ -98,7 +98,6 @@ void main() async {
       ],
       child: const SwipeSwap(),
     ),
-    // const SwipeSwap(),
   );
 }
 
