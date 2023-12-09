@@ -11,7 +11,6 @@ import 'package:swipeswap/libraries/models.dart';
 /// @param int milePrice How much the seller is charging per mile for delivery
 /// @param int rangeMiles How far the seller is willing to travel to deliver
 /// @param String? sellerId The backend id of the seller
-///
 class SellerModel {
   double basePrice;
   bool canDeliver;

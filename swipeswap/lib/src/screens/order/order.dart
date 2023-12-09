@@ -25,7 +25,7 @@ class Order extends StatefulWidget {
 
 class _OrderState extends State<Order> {
   String diningCourt = '';
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter(
     symbol: '',
   );
@@ -59,7 +59,7 @@ class _OrderState extends State<Order> {
           return Scaffold(
             appBar: AppBar(),
             body: Form(
-              key: formKey,
+              key: _formKey,
               child: Column(
                 children: [
                   // Title

@@ -11,7 +11,6 @@ import 'package:swipeswap/src/utils/constants.dart';
 /// [Swaps]
 /// [Seller]
 /// [Profile]
-///
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 

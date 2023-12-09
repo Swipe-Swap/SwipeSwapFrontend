@@ -26,8 +26,12 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final firebaseProvider = Provider.of<UserProvider>(context);
-    debugPrint("Phone number: ${firebaseProvider.user!.phoneNumber}");
-    String photoUrl = firebaseProvider.user!.photoUrl.toString();
+    debugPrint("Phone number: ${firebaseProvider.user?.phoneNumber ?? "null"}");
+    debugPrint(
+        "Photo url: ${firebaseProvider.user?.photoUrl.toString() ?? "null"}");
+    debugPrint(
+        "Full name: ${firebaseProvider.user?.fullName.toString() ?? "null"}");
+    String? photoUrl = firebaseProvider.user?.photoUrl.toString();
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false),
       body: Center(
@@ -35,7 +39,7 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              firebaseProvider.user!.fullName,
+              firebaseProvider.user?.fullName ?? "",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
@@ -44,7 +48,7 @@ class _ProfileState extends State<Profile> {
             ),
             CircleAvatar(
               radius: 40.sp, // Image radius
-              backgroundImage: NetworkImage(photoUrl),
+              backgroundImage: photoUrl != null ? NetworkImage(photoUrl) : null,
             ),
             SizedBox(
               height: 3.h,
